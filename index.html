@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samantha Jeanty — Exam 3 Mock (Fundamentals of Nursing)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-2:#efe7d6;
+    --ink:#23211c;
+    --ink-soft:#4f4a3f;
+    --line:#d9cfb8;
+    --teal:#0c6b5e;
+    --teal-deep:#084b41;
+    --teal-soft:#dcebe6;
+    --gold:#b9852b;
+    --correct:#1f7a4d;
+    --correct-bg:#e3f1e6;
+    --wrong:#b23b32;
+    --wrong-bg:#f7e3e0;
+    --shadow:0 2px 0 rgba(35,33,28,.08), 0 14px 30px -18px rgba(35,33,28,.4);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, #fbf7ee 0%, transparent 40%),
+      radial-gradient(circle at 88% 0%, #f0ead9 0%, transparent 45%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"DM Sans",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px 120px;}
+
+  /* HEADER */
+  header.hero{
+    padding:46px 0 26px;
+    border-bottom:2px solid var(--ink);
+    margin-bottom:4px;
+  }
+  .kicker{
+    font-family:"DM Mono",monospace;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 10px;
+  }
+  h1{
+    font-family:"Fraunces",serif;
+    font-weight:600;
+    font-size:clamp(34px,7vw,58px);
+    line-height:.98;
+    margin:0 0 14px;
+    letter-spacing:-.01em;
+  }
+  h1 em{font-style:italic;color:var(--teal);}
+  .sub{font-size:15px;color:var(--ink-soft);max-width:54ch;margin:0;}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;
+    font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink-soft);
+  }
+  .meta span{display:inline-flex;align-items:center;gap:6px;}
+  .meta b{color:var(--ink);font-weight:500;}
+
+  /* STICKY SCORE */
+  .scorebar{
+    position:sticky;top:0;z-index:40;
+    background:rgba(246,241,231,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    margin:0 -18px 0;padding:10px 18px;
+  }
+  .scorebar-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .track{flex:1;min-width:160px;height:10px;background:var(--paper-2);border-radius:20px;overflow:hidden;border:1px solid var(--line);}
+  .track > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--teal-deep));transition:width .4s ease;}
+  .scorenums{font-family:"DM Mono",monospace;font-size:13px;color:var(--ink-soft);white-space:nowrap;}
+  .scorenums b{color:var(--teal-deep);font-weight:600;}
+  .pct{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:var(--ink);min-width:54px;text-align:right;}
+
+  /* CHAPTER NAV */
+  nav.chips{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 6px;}
+  nav.chips button{
+    font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.02em;
+    border:1px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
+    padding:7px 11px;border-radius:30px;cursor:pointer;transition:.18s;
+  }
+  nav.chips button:hover{border-color:var(--teal);color:var(--teal-deep);}
+  nav.chips button.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  /* CHAPTER SECTION */
+  .chapter{margin-top:40px;scroll-margin-top:70px;}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;border-bottom:1.5px solid var(--line);padding-bottom:8px;margin-bottom:6px;}
+  .chapter-num{font-family:"DM Mono",monospace;font-size:13px;color:var(--gold);font-weight:500;}
+  .chapter-title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(22px,4.5vw,30px);margin:0;flex:1;}
+  .chapter-score{font-family:"DM Mono",monospace;font-size:12px;color:var(--ink-soft);}
+
+  /* QUESTION CARD */
+  .q{
+    background:#fffdf8;border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 18px;margin:16px 0;box-shadow:var(--shadow);
+  }
+  .q-top{display:flex;gap:10px;align-items:flex-start;margin-bottom:13px;}
+  .q-no{font-family:"DM Mono",monospace;font-size:12px;color:var(--paper);background:var(--teal);padding:3px 8px;border-radius:7px;white-space:nowrap;margin-top:2px;}
+  .q-tag{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:20px;padding:2px 9px;white-space:nowrap;margin-top:2px;}
+  .q-text{font-size:16.5px;font-weight:500;line-height:1.45;}
+  .q-text .hint{display:block;font-weight:400;font-size:13px;color:var(--ink-soft);margin-top:5px;font-style:italic;}
+
+  .opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 4px;}
+  .opt{
+    display:flex;gap:11px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;
+    background:var(--paper);transition:.14s;user-select:none;
+  }
+  .opt:hover{border-color:var(--teal);background:#fff;}
+  .opt .box{
+    width:21px;height:21px;flex:none;border:1.8px solid var(--ink-soft);
+    border-radius:50%;display:grid;place-items:center;margin-top:1px;font-size:12px;color:#fff;transition:.14s;
+  }
+  .opt.sata .box{border-radius:6px;}
+  .opt.sel .box{background:var(--teal);border-color:var(--teal);}
+  .opt.sel{border-color:var(--teal);background:#fff;}
+  .opt .ltr{font-family:"DM Mono",monospace;font-weight:500;margin-right:-4px;color:var(--ink-soft);}
+  .opt.correct{border-color:var(--correct);background:var(--correct-bg);}
+  .opt.correct .box{background:var(--correct);border-color:var(--correct);}
+  .opt.wrong{border-color:var(--wrong);background:var(--wrong-bg);}
+  .opt.wrong .box{background:var(--wrong);border-color:var(--wrong);}
+  .opt.locked{cursor:default;pointer-events:none;}
+  .opt.miss{border-style:dashed;border-color:var(--correct);}
+
+  /* matching */
+  .match-row{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:9px;background:var(--paper);}
+  .match-left{flex:1;font-weight:500;font-size:15px;}
+  .match-row select{
+    font-family:"DM Sans",sans-serif;font-size:14px;padding:8px 10px;border-radius:8px;
+    border:1.5px solid var(--line);background:#fff;color:var(--ink);min-width:46%;max-width:55%;
+  }
+  .match-row.correct{background:var(--correct-bg);border-color:var(--correct);}
+  .match-row.wrong{background:var(--wrong-bg);border-color:var(--wrong);}
+  .match-row .fix{font-family:"DM Mono",monospace;font-size:11px;color:var(--correct);display:block;margin-top:4px;}
+
+  /* calc */
+  .calc-wrap{display:flex;align-items:center;gap:10px;margin:14px 0 4px;}
+  .calc-input{font-family:"DM Mono",monospace;font-size:18px;width:140px;padding:10px 12px;border:1.8px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);}
+  .calc-input:focus{outline:none;border-color:var(--teal);}
+  .calc-unit{font-family:"DM Sans",sans-serif;font-size:15px;color:var(--ink-soft);font-weight:500;}
+
+  /* watermark */
+  .watermark{
+    position:fixed; inset:0; z-index:9999; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='330' height='168'%3E%3Ctext x='8' y='108' transform='rotate(-28 165 84)' font-family='Georgia, serif' font-size='20' font-weight='bold' fill='%230c6b5e'%3ESamantha Jeanty%3C/text%3E%3C/svg%3E");
+    background-repeat:repeat; opacity:.07;
+  }
+  .copyright{font-family:"DM Mono",monospace;font-size:11px;color:var(--ink-soft);}
+
+  .actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:"DM Sans",sans-serif;font-weight:600;font-size:14px;
+    border:none;border-radius:9px;padding:9px 18px;cursor:pointer;transition:.15s;
+  }
+  .btn-check{background:var(--ink);color:var(--paper);}
+  .btn-check:hover{background:var(--teal-deep);}
+  .btn-check:disabled{opacity:.4;cursor:not-allowed;}
+  .verdict{font-family:"DM Mono",monospace;font-size:13px;font-weight:500;}
+  .verdict.ok{color:var(--correct);}
+  .verdict.no{color:var(--wrong);}
+
+  .rationale{
+    margin-top:13px;border-left:3px solid var(--teal);background:var(--teal-soft);
+    padding:11px 14px;border-radius:0 10px 10px 0;font-size:14px;line-height:1.5;color:var(--ink);
+    display:none;
+  }
+  .rationale.show{display:block;animation:fade .3s ease;}
+  .rationale b{color:var(--teal-deep);}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+
+  /* RESULTS */
+  .results{
+    margin-top:50px;background:var(--ink);color:var(--paper);border-radius:18px;padding:30px 26px;display:none;
+  }
+  .results.show{display:block;}
+  .results h2{font-family:"Fraunces",serif;font-weight:600;font-size:30px;margin:0 0 4px;}
+  .results .big{font-family:"Fraunces",serif;font-size:60px;font-weight:600;line-height:1;margin:14px 0 6px;color:#f3d9a0;}
+  .results .breakdown{display:grid;grid-template-columns:1fr;gap:6px;margin-top:18px;font-family:"DM Mono",monospace;font-size:13px;}
+  .results .breakdown div{display:flex;justify-content:space-between;border-bottom:1px dotted rgba(246,241,231,.25);padding:5px 0;}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+  footer{margin-top:40px;font-family:"DM Mono",monospace;font-size:11.5px;color:var(--ink-soft);text-align:center;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="watermark" aria-hidden="true"></div>
+<div class="scorebar">
+  <div class="scorebar-inner">
+    <div class="track"><i id="trackFill"></i></div>
+    <div class="scorenums"><b id="sCorrect">0</b> correct · <span id="sAnswered">0</span>/<span id="sTotal">0</span> answered</div>
+    <div class="pct" id="sPct">—</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Samantha Jeanty · NRS 104 Fundamentals of Nursing</p>
+    <h1>Exam 3 — <em>Mock</em> Practice Test</h1>
+    <p class="sub">Self-grading practice exam built from Potter &amp; Perry 12th ed. Multiple choice, Select All That Apply, and matching. Answer a question, hit <b>Check</b>, and read the rationale. Your running score lives in the bar up top.</p>
+    <div class="meta">
+      <span>📚 <b>9 chapters + Rx</b></span>
+      <span>📝 <b id="mTotal">0</b> questions</span>
+      <span>🎯 Goal: <b>≥ 90%</b></span>
+      <span>🗓 <b>Exam: Tue Jun 2</b></span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn btn-ghost" onclick="revealAll()">Reveal all answers</button>
+    <button class="btn btn-ghost" onclick="resetAll()">Reset exam</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">Jump to score</button>
+  </div>
+
+  <nav class="chips" id="chips"></nav>
+
+  <main id="exam"></main>
+
+  <section class="results" id="results">
+    <h2>Your Results</h2>
+    <div class="big" id="rPct">—</div>
+    <div class="scorenums" style="color:var(--paper)"><b id="rCorrect" style="color:#f3d9a0">0</b> of <span id="rTotal">0</span> correct</div>
+    <div class="breakdown" id="rBreak"></div>
+    <div class="toolbar">
+      <button class="btn" style="background:#f3d9a0;color:var(--ink)" onclick="resetAll()">Retake exam</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="copyright">© 2026 Samantha Jeanty. All rights reserved.</span><br>
+    Potter &amp; Perry, Fundamentals of Nursing, 12th ed.<br>
+    Practice tool only — always defer to your course content and instructor for the real exam.
+  </footer>
+</div>
+
+<script>
+/* ============ QUESTION DATA ============ */
+const EXAM = [
+{ id:"ch24", num:"24", title:"Communication", questions:[
+  {type:"mc", q:"A nurse uses prayer and meditation to connect with a higher power. Which type of communication is this?",
+   options:["Interpersonal","Intrapersonal","Transpersonal","Small group"], answer:2,
+   rationale:"<b>Transpersonal</b> communication occurs within a person's spiritual domain (prayer, meditation, ritual). Intrapersonal is self-talk; interpersonal is one-on-one; small group is goal-directed interaction among a few people."},
+  {type:"mc", q:"A preoperative patient says, \"I'm scared I won't wake up from surgery.\" Which response is most therapeutic?",
+   options:["\"Don't worry, your surgeon is the best in the hospital.\"","\"It sounds like you're frightened about the surgery. Tell me more.\"","\"Everyone feels that way; it's completely normal.\"","\"You'll be fine — try to get some sleep.\""], answer:1,
+   rationale:"Reflecting the feeling and inviting elaboration uses <b>empathy and open-ended technique</b>. The others are <b>false reassurance</b> and minimizing, which block communication."},
+  {type:"mc", q:"A patient states, \"You're the worst nurse I've ever had.\" Which is the most assertive, therapeutic reply?",
+   options:["\"How can you say that when I check on you constantly?\"","\"I feel uncomfortable hearing that statement.\"","\"You shouldn't talk to people like that.\"","\"If I were you, I'd be grateful for a nurse like me.\""], answer:1,
+   rationale:"Assertive communication uses <b>\"I\" statements</b> (I feel, I think, I need) to express oneself without attacking. Arguing, scolding, and giving personal opinions are nontherapeutic."},
+  {type:"sata", q:"Which are therapeutic communication techniques?",
+   options:["Offering false reassurance","Using silence","Clarifying","Changing the subject","Active listening"], answers:[1,2,4],
+   rationale:"<b>Silence, clarifying, and active listening</b> are therapeutic. <b>False reassurance and changing the subject</b> are nontherapeutic and block communication."},
+  {type:"mc", q:"The SOLER acronym guides active listening. What does the \"L\" stand for?",
+   options:["Listen quietly","Lean toward the patient","Limit eye contact","Lower your voice"], answer:1,
+   rationale:"SOLER: <b>S</b>it squarely, <b>O</b>pen posture, <b>L</b>ean toward the patient, <b>E</b>ye contact, <b>R</b>elax."},
+  {type:"mc", q:"A nurse performs a sterile dressing change, working within 12 inches of the patient. Which spatial zone is being used?",
+   options:["Intimate","Personal","Social","Public"], answer:0,
+   rationale:"<b>Intimate</b> space is 0–18 inches and is used for hands-on care like dressing changes. Personal = 18 in–4 ft, social = 4–12 ft, public = 12+ ft."},
+  {type:"mc", q:"During which phase of the nurse–patient relationship do the nurse and patient set goals and identify problems together?",
+   options:["Preinteraction","Orientation","Working","Termination"], answer:2,
+   rationale:"The <b>working phase</b> is where the nurse and patient work toward goals and carry out interventions. Orientation is establishing trust and identifying expectations; termination is ending the relationship."},
+  {type:"mc", q:"Which statement about nonverbal communication is accurate?",
+   options:["It is less reliable than verbal communication","It carries more weight than verbal communication","It only includes facial expressions","It should be ignored during assessment"], answer:1,
+   rationale:"<b>Nonverbal cues generally carry more weight than verbal messages</b> and are harder to control consciously, so they often reveal true feelings."},
+  {type:"matching", q:"Match each communication level with its description.",
+   pairs:[
+     {left:"Intrapersonal", right:"Self-talk within one individual"},
+     {left:"Interpersonal", right:"One-on-one exchange between two people"},
+     {left:"Small group", right:"Goal-directed interaction among a few people"},
+     {left:"Public", right:"Interaction with a large audience"}
+   ],
+   rationale:"These are the five levels of communication (transpersonal is the fifth — spiritual). Know each by its scope and purpose."},
+  {type:"sata", q:"Which factors are barriers to effective communication?",
+   options:["Language differences","Use of open-ended questions","Sensory deficits (hearing/vision loss)","Stereotyping","Establishing trust"], answers:[0,2,3],
+   rationale:"<b>Language differences, sensory deficits, and stereotyping</b> impede communication. Open-ended questions and trust <i>facilitate</i> it."},
+  {type:"mc", q:"In the communication process, what is \"feedback\"?",
+   options:["The person who encodes the message","The method used to send the message","The response the receiver returns to the sender","The internal stimulus that prompts communication"], answer:2,
+   rationale:"<b>Feedback</b> is the message the receiver returns. The sender encodes/sends; the channel is the method; the referent is the stimulus that starts communication."},
+  {type:"mc", q:"Which question is open-ended and best encourages a patient to elaborate?",
+   options:["\"Are you in pain right now?\"","\"Did you take your medication today?\"","\"How have you been feeling since you came home?\"","\"Is the pain a 5 out of 10?\""], answer:2,
+   rationale:"<b>Open-ended questions</b> invite elaboration and cannot be answered with yes/no. The others are closed-ended and yield brief, specific answers."},
+],},
+
+{ id:"ch25", num:"25", title:"Patient Education", questions:[
+  {type:"mc", q:"A nurse teaches a patient how to self-inject insulin. Which learning domain is primarily involved?",
+   options:["Cognitive","Affective","Psychomotor","Spiritual"], answer:2,
+   rationale:"<b>Psychomotor</b> learning involves physical skills (injecting, ambulating with crutches). Cognitive = knowledge; affective = attitudes, values, feelings."},
+  {type:"mc", q:"Which method best confirms that a patient understood discharge teaching?",
+   options:["Ask, \"Do you understand?\"","Use the teach-back method","Give a printed handout","Document that teaching was completed"], answer:1,
+   rationale:"<b>Teach-back</b> (asking the patient to explain the information in their own words) is the gold standard for confirming understanding. Yes/no questions don't verify learning."},
+  {type:"mc", q:"What is the best way to evaluate psychomotor learning?",
+   options:["Written test","Verbal questioning","Return demonstration","Reviewing a pamphlet"], answer:2,
+   rationale:"<b>Return demonstration</b> lets the patient physically perform the skill so the nurse can verify competence — the best evaluation of psychomotor learning."},
+  {type:"sata", q:"Which factors should the nurse assess to determine a patient's readiness to learn?",
+   options:["Motivation","Pain level","Reading/literacy level","The nurse's documentation time","Anxiety level"], answers:[0,1,2,4],
+   rationale:"Readiness depends on <b>motivation, comfort (pain), literacy, and anxiety</b> — high pain or anxiety impairs learning. The nurse's charting time is irrelevant to readiness."},
+  {type:"mc", q:"When is the best time to begin discharge teaching?",
+   options:["The morning of discharge","On admission","Only after the patient asks","During the last hour of the stay"], answer:1,
+   rationale:"<b>Discharge teaching begins on admission</b>, allowing time to reinforce content and assess understanding before the patient goes home."},
+  {type:"mc", q:"A patient is in severe pain. What should the nurse do regarding scheduled teaching?",
+   options:["Teach quickly before the pain worsens","Postpone teaching until pain is controlled","Teach the family instead and skip the patient","Document that the patient refused teaching"], answer:1,
+   rationale:"Learning requires comfort and focus. <b>Postpone teaching until pain is managed</b>; a patient in pain cannot concentrate or retain information."},
+  {type:"matching", q:"Match each learning domain with an example teaching outcome.",
+   pairs:[
+     {left:"Cognitive", right:"Patient lists signs of hypoglycemia"},
+     {left:"Affective", right:"Patient expresses acceptance of a new diagnosis"},
+     {left:"Psychomotor", right:"Patient correctly changes a colostomy bag"}
+   ],
+   rationale:"Cognitive = knowing/listing; affective = attitudes/feelings/values; psychomotor = doing a physical skill."},
+  {type:"mc", q:"What should the nurse assess BEFORE selecting teaching materials for a patient?",
+   options:["The patient's insurance status","The patient's health literacy","The patient's favorite TV shows","Whether the family is present"], answer:1,
+   rationale:"<b>Health literacy</b> must be assessed first so materials match the patient's reading/comprehension level; otherwise teaching is ineffective."},
+  {type:"sata", q:"Which teaching strategies are most effective for an older adult learner?",
+   options:["Speak rapidly to cover more material","Allow extra time and frequent breaks","Use large, high-contrast printed materials","Build on the patient's existing experience","Teach in a noisy, busy hallway"], answers:[1,2,3],
+   rationale:"Older adults benefit from <b>more time, accessible materials, and connecting new content to prior experience</b>. Rushing and distracting environments impair learning."},
+  {type:"mc", q:"Which teaching method is most appropriate for the cognitive domain (transmitting knowledge to a group)?",
+   options:["Return demonstration","Role-play","Lecture/discussion","Behavior modification"], answer:2,
+   rationale:"<b>Lecture and discussion</b> efficiently convey knowledge (cognitive domain). Return demonstration targets psychomotor; role-play and behavior modification target affective."},
+],},
+
+{ id:"ch26", num:"26", title:"Informatics & Documentation", questions:[
+  {type:"mc", q:"What is the key difference between an EHR and an EMR?",
+   options:["An EHR is paper; an EMR is electronic","An EHR is shareable across multiple providers/organizations; an EMR is facility-specific","An EMR contains billing only","There is no difference"], answer:1,
+   rationale:"An <b>EHR</b> (Electronic Health Record) is designed to be shared across organizations and follow the patient; an <b>EMR</b> (Electronic Medical Record) is generally limited to a single facility."},
+  {type:"mc", q:"A nurse is giving a hand-off report using SBAR. What does the \"A\" stand for?",
+   options:["Assessment","Analysis","Action","Allergies"], answer:0,
+   rationale:"SBAR = <b>S</b>ituation, <b>B</b>ackground, <b>A</b>ssessment, <b>R</b>ecommendation — a standardized communication framework that improves hand-off safety."},
+  {type:"sata", q:"Which are characteristics of quality documentation?",
+   options:["Factual","Vague to allow flexibility","Accurate","Complete","Current (timely)"], answers:[0,2,3,4],
+   rationale:"Good documentation is <b>factual, accurate, complete, current, and organized</b>. Vagueness is the opposite of what is required."},
+  {type:"mc", q:"A nurse makes a charting error in a paper record. What is the correct way to fix it?",
+   options:["Erase it completely","Use correction fluid over it","Draw a single line through it, write \"error,\" and initial","Black it out with marker"], answer:2,
+   rationale:"Draw a <b>single line through the error</b>, label it (e.g., \"error\"), and initial/date it. The original entry must remain legible; never erase or obliterate."},
+  {type:"mc", q:"Which documentation practice is a legal and safety violation?",
+   options:["Charting immediately after care","Charting interventions before they are performed","Signing each entry","Using approved abbreviations"], answer:1,
+   rationale:"<b>Never chart in advance.</b> Documenting care before it is done is fraudulent and dangerous; chart only after the intervention is performed."},
+  {type:"mc", q:"After filing an incident/occurrence report for a patient fall, what should the nurse do?",
+   options:["Note in the chart that an incident report was completed","Document the objective facts of the fall in the medical record without referencing the report","Place a copy of the report in the chart","Avoid documenting the fall at all"], answer:1,
+   rationale:"Chart the <b>objective facts and assessment</b> of the event in the medical record, but do <b>not</b> reference or file the incident report in the chart — it is a separate risk-management document."},
+  {type:"matching", q:"Match each documentation format with its structure.",
+   pairs:[
+     {left:"SOAP", right:"Subjective, Objective, Assessment, Plan"},
+     {left:"PIE", right:"Problem, Intervention, Evaluation"},
+     {left:"DAR (Focus)", right:"Data, Action, Response"},
+     {left:"Narrative", right:"Story-like chronological account"}
+   ],
+   rationale:"Each is a charting structure. Recognize them by their component letters/approach."},
+  {type:"mc", q:"A nurse receives a telephone order from a provider. Which action ensures accuracy?",
+   options:["Carry out the order, then call back later","Read the order back to the provider for verification","Have another nurse interpret the order","Document it after the shift ends"], answer:1,
+   rationale:"<b>Read-back (and verify)</b> of verbal/telephone orders is a National Patient Safety Goal that prevents transcription and miscommunication errors."},
+  {type:"sata", q:"Which behaviors protect patient confidentiality under HIPAA?",
+   options:["Sharing your computer login with a coworker","Logging off after charting","Accessing only records needed for your assigned patients","Discussing patients in a public elevator","Using the minimum necessary information"], answers:[1,2,4],
+   rationale:"Protecting privacy means <b>logging off, accessing only your patients' records, and the minimum-necessary rule</b>. Sharing logins and public discussion are violations."},
+],},
+
+{ id:"ch30", num:"30", title:"Health Assessment & Physical Examination", questions:[
+  {type:"mc", q:"The nurse taps the patient's skin with the fingertips to vibrate underlying tissue and organs. Which technique is this?",
+   options:["Palpation","Inspection","Percussion","Auscultation"], answer:2,
+   rationale:"<b>Percussion</b> is tapping the body surface to produce vibration/sound that reflects tissue density."},
+  {type:"mc", q:"What is the correct sequence of techniques for examining most body systems?",
+   options:["Palpation, percussion, auscultation, inspection","Inspection, palpation, percussion, auscultation","Auscultation, inspection, palpation, percussion","Inspection, auscultation, percussion, palpation"], answer:1,
+   rationale:"For most systems the order is <b>Inspection → Palpation → Percussion → Auscultation (IPPA)</b>."},
+  {type:"mc", q:"When examining the abdomen, how does the order change?",
+   options:["It stays IPPA","Inspect, auscultate, percuss, palpate","Palpate first to find tenderness","Auscultate last"], answer:1,
+   rationale:"For the <b>abdomen</b>: Inspect → <b>Auscultate</b> → Percuss → Palpate. Palpation/percussion are done last because manipulating the abdomen alters bowel sounds."},
+  {type:"mc", q:"A patient is placed in the lithotomy position. Which area is being assessed?",
+   options:["Posterior thorax","Female genitalia and genital tract","Musculoskeletal system","Heart"], answer:1,
+   rationale:"<b>Lithotomy</b> provides maximal exposure of the female genitalia and facilitates speculum insertion."},
+  {type:"sata", q:"Which senses does the nurse use during INSPECTION?",
+   options:["Sight","Taste","Smell","Touch","Hearing"], answers:[0,2,4],
+   rationale:"Inspection uses <b>sight, smell, and hearing</b>. Touch is palpation; taste is never used in physical assessment."},
+  {type:"mc", q:"Which cranial nerve has ONLY a sensory function?",
+   options:["Olfactory (I)","Trigeminal (V)","Oculomotor (III)","Glossopharyngeal (IX)"], answer:0,
+   rationale:"<b>Olfactory (I)</b> is purely sensory (smell). The sensory-only nerves are I, II (optic), and VIII (vestibulocochlear)."},
+  {type:"matching", q:"Match each exam position with the area it best assesses.",
+   pairs:[
+     {left:"Sitting", right:"Lungs, posterior thorax, heart, upper body"},
+     {left:"Dorsal recumbent", right:"Abdomen (relaxes abdominal muscles)"},
+     {left:"Lithotomy", right:"Female genitalia"},
+     {left:"Prone", right:"Musculoskeletal system / hip extension"}
+   ],
+   rationale:"Match positions to their assessment purpose from Table 30.2."},
+  {type:"mc", q:"Which part of the hand is best for assessing skin temperature?",
+   options:["Finger pads","Palmar surface","Dorsum (back) of the hand","Fingertips"], answer:2,
+   rationale:"The <b>dorsum (back) of the hand</b> is most sensitive to temperature. Finger pads/palmar surface assess texture, masses, and pulsation."},
+  {type:"mc", q:"Which position provides full expansion of the lungs during a respiratory assessment?",
+   options:["Supine","Sitting upright","Prone","Knee-chest"], answer:1,
+   rationale:"<b>Sitting upright</b> allows full lung expansion and symmetric visualization of the thorax."},
+  {type:"sata", q:"What is required for the nurse to perform proper auscultation?",
+   options:["Good hearing","A working stethoscope","Knowledge of correct stethoscope use","A darkened room","Knowledge of where sounds are best heard"], answers:[0,1,2,4],
+   rationale:"Auscultation needs <b>adequate hearing, a good stethoscope, knowledge of its use, and knowing where sounds are best heard</b>. Lighting is irrelevant to listening."},
+  {type:"mc", q:"Which term describes abnormal drooping of the eyelid over the pupil?",
+   options:["Ectropion","Entropion","Ptosis","Nystagmus"], answer:2,
+   rationale:"<b>Ptosis</b> = drooping lid (often CN III impairment). Ectropion = lid turns out; entropion = lid turns in; nystagmus = involuntary eye oscillation."},
+  {type:"mc", q:"Bronchial breath sounds heard over the trachea are considered:",
+   options:["Adventitious (abnormal)","A normal breath sound","A sign of pneumonia","Crackles"], answer:1,
+   rationale:"<b>Bronchial sounds are normal</b> over the trachea (along with vesicular and bronchovesicular). Crackles, wheezes, and rhonchi are adventitious."},
+],},
+
+{ id:"ch38", num:"38", title:"Activity & Exercise", questions:[
+  {type:"mc", q:"To maintain balance while moving a patient, the nurse should:",
+   options:["Keep feet together with a narrow base","Widen the stance to enlarge the base of support and lower the center of gravity","Keep the knees locked","Hold the patient far from the body"], answer:1,
+   rationale:"A <b>wider base of support and lower center of gravity</b> improve stability. Keeping the load close to the body and bending the knees protects the back."},
+  {type:"mc", q:"Which is an example of an isometric exercise?",
+   options:["Walking on a treadmill","Swimming laps","Tightening the quadriceps without moving the leg","Cycling"], answer:2,
+   rationale:"<b>Isometric</b> = muscle tension without joint movement (e.g., quad sets). <b>Isotonic</b> = muscle shortening with movement (walking, swimming, cycling)."},
+  {type:"mc", q:"When lifting a heavy object, the nurse should use which muscles to prevent injury?",
+   options:["Back muscles","Arm muscles only","Leg muscles","Abdominal muscles only"], answer:2,
+   rationale:"Use the <b>large leg muscles</b>, not the back: bend at the knees and hips, keep the back straight, and let the legs do the lifting."},
+  {type:"sata", q:"Which are benefits of regular physical activity and exercise?",
+   options:["Improved sleep","Reduced anxiety","Increased risk of osteoporosis","Lower blood pressure","Improved cardiovascular function"], answers:[0,1,3,4],
+   rationale:"Exercise improves <b>sleep, mood, blood pressure, and cardiovascular function</b> and <i>reduces</i> osteoporosis risk by promoting bone density."},
+  {type:"mc", q:"Which term describes awareness of the position and movement of one's body parts?",
+   options:["Body alignment","Proprioception","Activity tolerance","Muscle tone"], answer:1,
+   rationale:"<b>Proprioception</b> is the sense of body position/movement, mediated by receptors in joints and muscles."},
+  {type:"matching", q:"Match each joint type with its description.",
+   pairs:[
+     {left:"Synovial", right:"Freely movable (e.g., knee, shoulder)"},
+     {left:"Cartilaginous", right:"Slightly movable (e.g., vertebrae)"},
+     {left:"Fibrous", right:"Immovable (e.g., skull sutures)"}
+   ],
+   rationale:"Joints are classified by mobility: synovial (freely movable), cartilaginous (slightly movable), fibrous (immovable)."},
+  {type:"mc", q:"Which finding indicates a patient's activity tolerance has been exceeded during ambulation?",
+   options:["Pink, warm skin","Respiratory rate and heart rate return to baseline within minutes","Dyspnea, dizziness, and a marked rise in heart rate","Steady, even gait"], answer:2,
+   rationale:"Signs that activity is poorly tolerated include <b>dyspnea, dizziness, chest pain, and an excessive/sustained rise in heart rate</b>. Stop and rest the patient."},
+  {type:"mc", q:"When transferring a patient from bed to stretcher, the safest practice is to:",
+   options:["Lift the patient manually with one nurse","Use a friction-reducing device and adequate staff","Pull the patient by the arms","Have the patient stand and pivot"], answer:1,
+   rationale:"<b>Safe patient handling</b> uses assistive/friction-reducing devices (slide board, mechanical lift) and enough trained staff to prevent injury to patient and nurse."},
+  {type:"sata", q:"Which nursing actions promote correct body mechanics and prevent injury?",
+   options:["Bend at the waist to reach low objects","Face the direction of movement","Pivot rather than twist the spine","Carry loads at arm's length","Tighten abdominal and gluteal muscles before lifting"], answers:[1,2,4],
+   rationale:"<b>Face the work, pivot don't twist, and tighten core muscles.</b> Bending at the waist and holding loads away from the body strain the back."},
+],},
+
+{ id:"ch39", num:"39", title:"Immobility", questions:[
+  {type:"mc", q:"An immobile patient stands up and becomes dizzy with a drop in blood pressure. This is:",
+   options:["Orthostatic hypotension","Atelectasis","A pulmonary embolism","Renal calculi"], answer:0,
+   rationale:"<b>Orthostatic (postural) hypotension</b> results from cardiovascular deconditioning during immobility; the body can't quickly compensate when moving upright."},
+  {type:"mc", q:"Which respiratory complication of immobility involves collapse of alveoli?",
+   options:["Hypoxia","Atelectasis","Pleurisy","Epistaxis"], answer:1,
+   rationale:"<b>Atelectasis</b> is alveolar collapse from shallow breathing and pooled secretions during immobility, increasing pneumonia risk."},
+  {type:"sata", q:"Which are hazards of immobility?",
+   options:["Pressure injuries","Deep vein thrombosis","Increased bone density","Constipation","Muscle atrophy and contractures"], answers:[0,1,3,4],
+   rationale:"Immobility causes <b>pressure injuries, DVT, constipation, and muscle atrophy/contractures</b>. Bone density <i>decreases</i> (disuse osteoporosis), not increases."},
+  {type:"mc", q:"Which assessment finding suggests a deep vein thrombosis (DVT) in an immobile patient?",
+   options:["Bilateral cool feet","Unilateral calf swelling, warmth, and redness","Symmetric pedal pulses","Generalized pallor"], answer:1,
+   rationale:"DVT classically presents with <b>unilateral</b> calf swelling, warmth, redness, and tenderness. Prevention: early mobility, SCDs, anticoagulants, hydration."},
+  {type:"matching", q:"Match each body system with a complication of immobility.",
+   pairs:[
+     {left:"Cardiovascular", right:"Orthostatic hypotension / thrombus"},
+     {left:"Respiratory", right:"Atelectasis / pneumonia"},
+     {left:"Musculoskeletal", right:"Contractures / disuse osteoporosis"},
+     {left:"Urinary", right:"Stasis and renal calculi"}
+   ],
+   rationale:"Know one hallmark complication per system; this is heavily tested."},
+  {type:"mc", q:"To prevent footdrop and contractures in an immobile patient, the nurse should:",
+   options:["Keep the patient supine without supports","Use high-top shoes or a foot board and perform ROM","Restrict all movement","Elevate the knees continuously on pillows"], answer:1,
+   rationale:"<b>Maintaining neutral foot position (footboard/high-tops) and regular range-of-motion exercises</b> prevent footdrop and contractures. Continuous knee elevation promotes flexion contractures."},
+  {type:"sata", q:"Which interventions help prevent complications of immobility?",
+   options:["Reposition at least every 2 hours","Encourage deep breathing and incentive spirometry","Restrict fluids to reduce urination","Apply sequential compression devices","Increase dietary fiber and fluids"], answers:[0,1,3,4],
+   rationale:"<b>Repositioning, deep breathing, SCDs, and fiber/fluids</b> prevent skin, lung, clot, and bowel complications. Restricting fluids worsens stasis, calculi, and constipation."},
+  {type:"mc", q:"Immobility leads to a negative nitrogen balance because of:",
+   options:["Increased protein synthesis","Protein breakdown (catabolism) exceeding intake","Excess calcium intake","Increased insulin production"], answer:1,
+   rationale:"Immobility increases <b>protein catabolism</b>, producing a negative nitrogen balance, muscle wasting, and impaired healing."},
+],},
+
+{ id:"ch40", num:"40", title:"Hygiene", questions:[
+  {type:"mc", q:"Which instruction is correct for diabetic foot care?",
+   options:["Soak feet daily in hot water","Cut nails in a deep curve","Inspect feet daily and cut nails straight across","Go barefoot at home for ventilation"], answer:2,
+   rationale:"Diabetic foot care: <b>inspect daily, wash with warm (not hot) water, cut nails straight across, never go barefoot.</b> Neuropathy and poor circulation raise injury/infection risk."},
+  {type:"mc", q:"In which position should the nurse place an unconscious patient to provide oral care safely?",
+   options:["Supine and flat","Side-lying (lateral) with head turned to the side","High Fowler's","Trendelenburg"], answer:1,
+   rationale:"<b>Side-lying with the head turned to the side</b> lets secretions and fluid drain out, preventing aspiration during oral care of an unconscious patient."},
+  {type:"sata", q:"Which are appropriate principles of patient hygiene care?",
+   options:["Wash from cleanest to dirtiest area","Use the same water for the whole bath regardless of soiling","Provide privacy and maintain dignity","Assess the skin during the bath","Encourage independence when able"], answers:[0,2,3,4],
+   rationale:"Bathe <b>clean → dirty</b>, protect privacy, use the bath to assess skin, and promote independence. Water should be changed when soiled or cool."},
+  {type:"mc", q:"When giving perineal care to a female patient, the nurse cleans:",
+   options:["From the rectum toward the urethra","From front to back (urethra toward rectum)","In a circular scrubbing motion","Only with antiseptic solution"], answer:1,
+   rationale:"Clean <b>front to back</b> (urethra → rectum) to avoid moving rectal bacteria toward the urinary meatus and causing UTI."},
+  {type:"matching", q:"Match each hygiene practice with the patient situation.",
+   pairs:[
+     {left:"Side-lying position", right:"Oral care for the unconscious patient"},
+     {left:"Cut nails straight across", right:"Diabetic foot care"},
+     {left:"Front-to-back cleansing", right:"Female perineal care"},
+     {left:"Remove and clean separately", right:"Care of dentures"}
+   ],
+   rationale:"Match each technique to the correct hygiene scenario."},
+  {type:"mc", q:"Which water temperature is appropriate for a routine bed bath?",
+   options:["Cold to stimulate circulation","Warm (about 43–46°C / 110–115°F)","Hot, as tolerated","Room temperature only"], answer:1,
+   rationale:"Bath water should be <b>comfortably warm (~43–46°C)</b>; too hot risks burns (especially with sensory deficits), too cold causes chilling."},
+  {type:"sata", q:"Why is oral hygiene important for hospitalized patients?",
+   options:["Prevents pneumonia by reducing oral bacteria","Promotes comfort and appetite","Replaces the need for tooth brushing at home","Reduces risk of infection","Maintains intact mucous membranes"], answers:[0,1,3,4],
+   rationale:"Oral care <b>reduces bacteria (lowering pneumonia risk), promotes comfort/appetite, prevents infection, and protects mucosa.</b> It complements—doesn't replace—routine home care."},
+  {type:"mc", q:"For an unconscious patient, how should the nurse provide eye care?",
+   options:["Leave the eyes alone","Clean from inner to outer canthus and use lubricating drops as ordered","Scrub vigorously with gauze","Tape the eyes shut without cleaning"], answer:1,
+   rationale:"Clean the eye <b>inner to outer canthus</b> with a fresh section of cloth for each wipe; use lubricant/artificial tears as ordered to prevent corneal drying."},
+],},
+
+{ id:"ch41", num:"41", title:"Oxygenation", questions:[
+  {type:"mc", q:"A patient is dyspneic. Which position best promotes lung expansion and eases breathing?",
+   options:["Supine","High Fowler's (sitting upright)","Trendelenburg","Prone"], answer:1,
+   rationale:"<b>High Fowler's</b> drops the diaphragm and maximizes lung expansion, easing the work of breathing in dyspnea."},
+  {type:"mc", q:"A nasal cannula is typically used at what oxygen flow rate?",
+   options:["1–6 L/min","10–15 L/min","Up to 60 L/min","Flow does not matter"], answer:0,
+   rationale:"A <b>nasal cannula delivers 1–6 L/min</b> (~24–44% FiO₂). Higher flows dry the mucosa; masks are used when more oxygen is needed."},
+  {type:"sata", q:"Which are early signs of hypoxia?",
+   options:["Restlessness and anxiety","Tachycardia","Bradypnea and lethargy as the first signs","Increased respiratory rate","Use of accessory muscles"], answers:[0,1,3,4],
+   rationale:"Early hypoxia → <b>restlessness, anxiety, tachycardia, tachypnea, and accessory muscle use.</b> Bradypnea, lethargy, and cyanosis are <i>late</i> signs."},
+  {type:"mc", q:"What is the purpose of an incentive spirometer?",
+   options:["Deliver supplemental oxygen","Promote deep breathing and prevent atelectasis","Suction airway secretions","Measure blood oxygen"], answer:1,
+   rationale:"An <b>incentive spirometer</b> encourages slow, deep inhalation to expand alveoli and prevent atelectasis, especially postoperatively."},
+  {type:"matching", q:"Match each oxygen delivery device with its feature.",
+   pairs:[
+     {left:"Nasal cannula", right:"Low flow 1–6 L/min, allows eating/talking"},
+     {left:"Simple face mask", right:"5–10 L/min, ~40–60% FiO₂"},
+     {left:"Non-rebreather mask", right:"High FiO₂ via reservoir bag with one-way valves"},
+     {left:"Venturi mask", right:"Delivers precise, fixed FiO₂"}
+   ],
+   rationale:"Know each device's flow and the precision/level of oxygen it provides."},
+  {type:"mc", q:"How long should the nurse apply suction when suctioning an airway?",
+   options:["No more than 10–15 seconds per pass","30–45 seconds per pass","Until secretions stop completely","60 seconds minimum"], answer:0,
+   rationale:"Limit suction to <b>10–15 seconds per pass</b> to avoid hypoxia, trauma, and vagal stimulation; oxygenate before and between passes."},
+  {type:"mc", q:"Pursed-lip breathing is most beneficial for a patient with:",
+   options:["Acute anaphylaxis","COPD","A simple nosebleed","Hypoglycemia"], answer:1,
+   rationale:"<b>Pursed-lip breathing</b> prolongs exhalation and keeps airways open longer, helping COPD patients expel trapped air and reduce dyspnea."},
+  {type:"sata", q:"Which nursing interventions promote oxygenation?",
+   options:["Position in high Fowler's","Encourage coughing and deep breathing","Keep the patient flat and still","Ensure adequate hydration to thin secretions","Encourage incentive spirometry"], answers:[0,1,3,4],
+   rationale:"<b>Upright positioning, coughing/deep breathing, hydration, and incentive spirometry</b> all support oxygenation and airway clearance. Lying flat reduces lung expansion."},
+  {type:"mc", q:"Which finding is a LATE sign of inadequate oxygenation?",
+   options:["Restlessness","Cyanosis","Mild tachypnea","Anxiety"], answer:1,
+   rationale:"<b>Cyanosis</b> is a late, ominous sign. Restlessness, anxiety, and tachypnea appear earlier and should prompt intervention before cyanosis develops."},
+],},
+
+{ id:"ch48", num:"48", title:"Skin Integrity & Wound Care", questions:[
+  {type:"mc", q:"Intact skin with localized, non-blanchable redness over a bony prominence indicates which pressure injury stage?",
+   options:["Stage 1","Stage 2","Stage 3","Stage 4"], answer:0,
+   rationale:"<b>Stage 1</b> = intact skin with non-blanchable erythema. Stage 2 = partial-thickness loss (open blister); the injury is not yet open in stage 1."},
+  {type:"mc", q:"A pressure injury with full-thickness skin loss and visible subcutaneous fat, but no exposed bone, muscle, or tendon, is:",
+   options:["Stage 1","Stage 2","Stage 3","Stage 4"], answer:2,
+   rationale:"<b>Stage 3</b> = full-thickness loss with visible fat. <b>Stage 4</b> exposes bone, muscle, or tendon."},
+  {type:"sata", q:"Which factors increase a patient's risk for pressure injuries (Braden Scale domains)?",
+   options:["Impaired sensory perception","Moisture (incontinence)","Frequent independent repositioning","Friction and shear","Poor nutrition"], answers:[0,1,3,4],
+   rationale:"Braden Scale risk factors: <b>sensory perception, moisture, activity, mobility, nutrition, and friction/shear.</b> Frequent independent repositioning is <i>protective</i>."},
+  {type:"mc", q:"A pressure injury covered with slough or eschar so the depth cannot be determined is classified as:",
+   options:["Stage 2","Stage 3","Unstageable","Deep tissue injury"], answer:2,
+   rationale:"<b>Unstageable</b> = full-thickness loss where the base is obscured by slough/eschar; staging requires removing enough nonviable tissue to see the depth."},
+  {type:"matching", q:"Match each wound drainage type with its description.",
+   pairs:[
+     {left:"Serous", right:"Clear, watery plasma"},
+     {left:"Sanguineous", right:"Bright red, fresh bleeding"},
+     {left:"Serosanguineous", right:"Pale, pink, watery (plasma + blood)"},
+     {left:"Purulent", right:"Thick, yellow/green — indicates infection"}
+   ],
+   rationale:"Drainage color/consistency guides wound assessment; purulent suggests infection."},
+  {type:"mc", q:"A surgical incision with clean, approximated edges that is sutured closed heals by:",
+   options:["Primary intention","Secondary intention","Tertiary intention","Granulation only"], answer:0,
+   rationale:"<b>Primary intention</b>: clean wound with approximated edges (sutured incision). Secondary = open wound healing by granulation; tertiary = delayed closure."},
+  {type:"mc", q:"How often should a bedridden, at-risk patient be repositioned to prevent pressure injuries?",
+   options:["Every 2 hours","Every 8 hours","Once per shift","Only when uncomfortable"], answer:0,
+   rationale:"Reposition at-risk patients at least <b>every 2 hours</b> (more often in a chair) to relieve pressure over bony prominences."},
+  {type:"sata", q:"Which nursing actions help prevent skin breakdown?",
+   options:["Keep skin clean and dry","Massage reddened bony prominences vigorously","Use pressure-redistribution surfaces","Maintain adequate nutrition and hydration","Reposition on a regular schedule"], answers:[0,2,3,4],
+   rationale:"Prevent breakdown with <b>clean/dry skin, support surfaces, good nutrition, and scheduled repositioning.</b> <i>Never massage reddened bony areas</i> — it can worsen tissue damage."},
+  {type:"mc", q:"Heat therapy is contraindicated in which situation?",
+   options:["Chronic muscle stiffness","Active bleeding or acute localized inflammation","Joint stiffness from arthritis","Promoting circulation to a healing area"], answer:1,
+   rationale:"Heat causes vasodilation, so it is <b>contraindicated with active bleeding and acute inflammation</b> (e.g., appendicitis), where it would worsen bleeding or spread infection."},
+],},
+];
+
+/* ============ EXPANSION: more questions per chapter (grounded in the bank's concept content) ============ */
+const EXTRA = {
+"ch24":[
+  {type:"mc", q:"The nurse reviews the patient's chart and plans the approach before ever entering the room. Which phase of the helping relationship is this?",
+   options:["Orientation","Pre-interaction","Working","Termination"], answer:1,
+   rationale:"The <b>pre-interaction phase</b> occurs before meeting the patient — the nurse gathers data and plans. Orientation begins at first contact (setting the tone, establishing trust)."},
+  {type:"mc", q:"A patient smiles and laughs while describing the recent death of a spouse. The nurse documents this as:",
+   options:["Inappropriate affect","Receptive aphasia","Assertiveness","Flat affect"], answer:0,
+   rationale:"<b>Inappropriate affect</b> is a facial/emotional expression that does not match the content of the verbal message."},
+  {type:"mc", q:"During which phase does the nurse let the patient know when the relationship will end?",
+   options:["Pre-interaction","Orientation","Working","Termination"], answer:1,
+   rationale:"The expected end of the relationship is introduced during the <b>orientation phase</b>, so the patient knows what to expect from the start."},
+  {type:"sata", q:"Which techniques improve communication with a hearing-impaired patient?",
+   options:["Check for hearing aids and glasses","Reduce background/environmental noise","Shout loudly into the ear","Face the patient when speaking","Use gestures and visual cues"], answers:[0,1,3,4],
+   rationale:"Check aids, cut noise, face the patient, and use gestures. <b>Shouting distorts speech</b> and is not helpful; speak clearly at a normal-to-slightly-raised volume."},
+  {type:"mc", q:"A patient with expressive (Broca's) aphasia has shaky handwriting. Which communication aid is most appropriate?",
+   options:["A pen and paper for written notes","A picture/communication board","Speaking very loudly","Avoiding communication until speech returns"], answer:1,
+   rationale:"A <b>picture/communication board</b> lets the aphasic patient point to needs. Writing is frustrating when handwriting is impaired."},
+],
+"ch25":[
+  {type:"mc", q:"What is the FIRST step of the teaching process?",
+   options:["Planning","Assessment","Implementation","Evaluation"], answer:1,
+   rationale:"The teaching process mirrors the nursing process: <b>assess</b> → diagnose → plan → implement → evaluate. Assessment of learning needs comes first."},
+  {type:"mc", q:"A patient's belief in their own ability to successfully perform a task (e.g., self-injection) is called:",
+   options:["Motivation","Self-efficacy","Readiness","Reinforcement"], answer:1,
+   rationale:"<b>Self-efficacy</b> (from social learning theory) is a person's perceived ability to succeed at a task; it strongly influences learning and behavior change."},
+  {type:"mc", q:"A nurse uses dolls and play to teach a procedure. Which age group is the target?",
+   options:["Toddlers/preschoolers","Adolescents","Middle adults","Older adults"], answer:0,
+   rationale:"<b>Play</b> (handling equipment, bandaging a doll) is developmentally appropriate teaching for toddlers and young children."},
+  {type:"mc", q:"Which learner learns best while moving and doing hands-on activities?",
+   options:["Visual learner","Auditory learner","Kinesthetic learner","Passive learner"], answer:2,
+   rationale:"<b>Kinesthetic</b> learners learn best through movement and hands-on participation."},
+  {type:"sata", q:"Which strategies improve teaching for older adult patients?",
+   options:["Begin and end with the most important information","Allow extra time to respond","Use rapid-fire delivery to save time","Build on prior life experience","Provide a calm, well-lit environment"], answers:[0,1,3,4],
+   rationale:"Front-load and repeat key points, allow time, connect to experience, and optimize the environment. Rushing impairs retention."},
+],
+"ch26":[
+  {type:"mc", q:"Which entry is an example of FACTUAL documentation?",
+   options:["\"Patient appears anxious.\"","\"Patient is uncooperative.\"","\"Patient respirations 22/min, even and unlabored.\"","\"Patient seems to be in pain.\""], answer:2,
+   rationale:"Factual charting is <b>objective and descriptive</b> (measurable observations). \"Appears,\" \"seems,\" and \"uncooperative\" are interpretations/opinions."},
+  {type:"mc", q:"A nurse leaves a blank line while charting. What is the correct action?",
+   options:["Leave it for a later entry","Draw a line through the empty space and sign","Use correction fluid","Skip every other line routinely"], answer:1,
+   rationale:"Chart consecutively line by line; if space is left, <b>draw a single line through it and sign</b> so no one can add to your entry."},
+  {type:"mc", q:"What is a unique advantage of the electronic health record (EHR)?",
+   options:["It is only accessible at one facility","It integrates all patient information into one record accessible across settings","It eliminates the need for confidentiality","It is always handwritten"], answer:1,
+   rationale:"The <b>EHR integrates</b> all pertinent information into one record available across providers and settings — its key advantage over a facility-bound EMR."},
+  {type:"mc", q:"A documentation method organized as Problem, Intervention, Evaluation is called:",
+   options:["SOAP","PIE","Narrative","Source-oriented"], answer:1,
+   rationale:"<b>PIE</b> = Problem, Intervention, Evaluation. SOAP = Subjective/Objective/Assessment/Plan; narrative is chronological prose."},
+  {type:"mc", q:"What does a \"variance\" on a critical pathway indicate?",
+   options:["The patient met all expected outcomes early","Activities were not completed as predicted or outcomes were not met on time","The chart was filed incorrectly","The provider changed the diagnosis"], answer:1,
+   rationale:"A <b>variance</b> occurs when critical-pathway activities aren't completed as predicted or the patient doesn't meet expected outcomes within the timeframe."},
+  {type:"sata", q:"Which are correct legal documentation practices?",
+   options:["Record entries legibly and in ink","Chart objective, factual data","Document care before it is performed","Sign each entry","Correct errors by drawing a single line through and initialing"], answers:[0,1,3,4],
+   rationale:"Legible, factual, signed entries with proper error correction are required. <b>Never chart before care is given.</b>"},
+],
+"ch30":[
+  {type:"mc", q:"To assess the integrity of the optic nerve (CN II) in a patient after a stroke, the nurse would:",
+   options:["Perform a Weber test","Use a Snellen chart","Perform a Rinne test","Use the Glasgow Coma Scale"], answer:1,
+   rationale:"The <b>Snellen chart</b> tests visual acuity (optic nerve). Weber/Rinne assess hearing; the GCS assesses level of consciousness."},
+  {type:"mc", q:"On the Glasgow Coma Scale, abnormal extension (decerebrate) as the best motor response earns a score of:",
+   options:["2","3","4","5"], answer:0,
+   rationale:"Abnormal extension = <b>2</b>. Abnormal flexion = 3, flexion withdrawal = 4, localizes pain = 5, obeys commands = 6."},
+  {type:"mc", q:"While counting a patient's respirations, the nurse should:",
+   options:["Tell the patient you are counting breaths","Keep the patient unaware that respirations are being assessed","Ask the patient to breathe deeply","Count only for 5 seconds"], answer:1,
+   rationale:"A patient aware of respiratory assessment may alter their rate/depth, so the nurse <b>does not announce</b> it (often counts right after the pulse)."},
+  {type:"mc", q:"A patient's breath has a sweet, fruity odor. The nurse should assess for:",
+   options:["Liver failure","Diabetic ketoacidosis","Urinary tract infection","Bowel obstruction"], answer:1,
+   rationale:"A <b>sweet, fruity (acetone) breath odor</b> suggests diabetic ketoacidosis (ketones)."},
+  {type:"sata", q:"Which factors should the nurse consider for culturally sensitive assessment?",
+   options:["Health beliefs and practices","Use of alternative therapies","Comfort with physical closeness/touch","The nurse's personal schedule","Nutritional habits"], answers:[0,1,2,4],
+   rationale:"Culture shapes health beliefs, use of alternative therapies, comfort with touch, family roles, and nutrition. The nurse's schedule is irrelevant to cultural sensitivity."},
+],
+"ch38":[
+  {type:"mc", q:"A trochanter roll placed alongside the hips of a supine patient prevents:",
+   options:["Footdrop","External rotation of the hips","Plantar flexion","Wrist contractures"], answer:1,
+   rationale:"A <b>trochanter roll</b> keeps the hips in neutral alignment, preventing external rotation."},
+  {type:"mc", q:"When should passive range-of-motion (ROM) exercises begin for a patient who has lost the ability to move a joint?",
+   options:["Only after full recovery","As soon as the ability to move the joint is lost","After 1 week of immobility","Only if the patient requests it"], answer:1,
+   rationale:"<b>Passive ROM begins as soon as movement is lost</b> to prevent contractures; move slowly and smoothly just to the point of resistance."},
+  {type:"mc", q:"Which term describes a person's particular manner or style of walking?",
+   options:["Posture","Gait","Tone","Alignment"], answer:1,
+   rationale:"<b>Gait</b> is the manner/style of walking; it's assessed for balance, safety, and neuromuscular function."},
+  {type:"sata", q:"Which actions reflect safe patient handling during a difficult transfer?",
+   options:["Assess the patient's ability to assist","Use enough trained staff (often 3–4 people)","Begin before help arrives to save time","Use friction-reducing devices/mechanical lifts","Tighten abdominal muscles and bend the knees"], answers:[0,1,3,4],
+   rationale:"Assess ability, get adequate staff and devices, and use good body mechanics. <b>Never begin until the task can be done safely.</b>"},
+],
+"ch39":[
+  {type:"mc", q:"An immobile patient develops renal calculi. These stones are primarily composed of:",
+   options:["Cholesterol","Calcium","Potassium","Uric acid only"], answer:1,
+   rationale:"Immobility causes <b>calcium</b> to leave bones and pool in the urine, forming calcium renal calculi; urinary stasis worsens stone formation."},
+  {type:"mc", q:"How does prolonged immobility affect metabolism?",
+   options:["Increases the metabolic rate","Decreases the metabolic rate and causes protein breakdown","Has no metabolic effect","Increases bone density"], answer:1,
+   rationale:"Immobility <b>decreases the basal metabolic rate</b> and alters carbohydrate, fat, and protein metabolism, producing a negative nitrogen balance."},
+  {type:"mc", q:"To assess body alignment in a bedridden, immobile patient, the nurse should position the patient in:",
+   options:["High Fowler's","The lateral position","Supine and flat","Trendelenburg"], answer:1,
+   rationale:"Alignment is assessed in the <b>lateral position</b> so the nurse can evaluate the spine and remove pillows/positioning aids that mask misalignment."},
+  {type:"mc", q:"Which medications are most widely used for DVT prophylaxis in immobile patients?",
+   options:["Acetaminophen and ibuprofen","Heparin and low-molecular-weight heparin","Insulin and metformin","Furosemide and digoxin"], answer:1,
+   rationale:"<b>Heparin and low-molecular-weight heparin</b> are the mainstays of DVT prophylaxis; combined with early mobility, hydration, and SCDs."},
+  {type:"sata", q:"Which nursing assessments/actions are appropriate for an immobile patient at risk for complications?",
+   options:["Auscultate lung fields for crackles/diminished sounds","Measure bilateral calf circumference daily","Encourage as much self-care as the patient can do","Keep the patient flat and motionless","Use a standardized tool such as the Braden Scale"], answers:[0,1,2,4],
+   rationale:"Assess lungs, monitor calves for DVT, promote self-care/mobility, and use the Braden Scale for skin risk. Keeping the patient motionless worsens every complication."},
+],
+"ch40":[
+  {type:"mc", q:"Why is foot care especially critical for a patient with diabetes?",
+   options:["Diabetics cannot wear shoes","Foot ulceration is the most common precursor to lower-extremity amputation","Their nails grow faster","Foot care has no special importance"], answer:1,
+   rationale:"<b>Foot ulceration is the leading precursor to amputation</b> in diabetes due to neuropathy and poor circulation; daily inspection and careful nail/skin care are essential."},
+  {type:"mc", q:"Moisture left on the skin (e.g., from incontinence or perspiration) contributes to breakdown because it:",
+   options:["Strengthens the epidermis","Serves as a medium for bacterial growth and softens/irritates skin","Improves circulation","Has no effect on intact skin"], answer:1,
+   rationale:"<b>Moisture is a medium for bacterial growth</b>, softens epidermal cells, and causes maceration and irritation — keep skin clean and dry."},
+  {type:"mc", q:"A wart on the sole of the foot caused by the papillomavirus is a:",
+   options:["Callus","Corn","Plantar wart","Bunion"], answer:2,
+   rationale:"A <b>plantar wart</b> appears on the sole and is caused by the human papillomavirus."},
+  {type:"mc", q:"When inspecting hair in a home-care setting, finding parasites attached to hair shafts on the scalp indicates:",
+   options:["Dandruff","Head lice (pediculosis capitis)","Alopecia","Xerostomia"], answer:1,
+   rationale:"<b>Head lice</b> attach to the scalp and hair shafts; they spread easily and require prompt treatment. (Dandruff is scaling; alopecia is hair loss.)"},
+  {type:"mc", q:"Which practice most contributes to excessively dry skin?",
+   options:["Bathing every other day with warm water","Daily bathing with very hot water and harsh soap","Applying moisturizer after bathing","Patting skin dry"], answer:1,
+   rationale:"<b>Daily bathing with water that is too hot and harsh soap</b> strips natural oils and dries the skin, especially in older adults."},
+],
+"ch41":[
+  {type:"mc", q:"Which condition decreases the oxygen-carrying capacity of the blood?",
+   options:["Anemia","Hypertension","Bradycardia","Constipation"], answer:0,
+   rationale:"<b>Anemia</b> (low hemoglobin) reduces the blood's oxygen-carrying capacity, leading to fatigue, pallor, and breathlessness."},
+  {type:"mc", q:"Carbon monoxide decreases oxygenation because it:",
+   options:["Increases hemoglobin production","Binds tightly to hemoglobin, displacing oxygen","Dilates the airways","Raises the respiratory rate harmlessly"], answer:1,
+   rationale:"CO binds hemoglobin far more strongly than oxygen and does not easily dissociate, making hemoglobin <b>unavailable to carry oxygen</b>."},
+  {type:"mc", q:"A patient with COPD sits upright and leans forward over a bedside table to breathe. This is the:",
+   options:["Supine position","Orthopneic (tripod) position","Trendelenburg position","Prone position"], answer:1,
+   rationale:"The <b>orthopneic/tripod position</b> (upright, leaning forward on a table) maximizes chest expansion and eases breathing in COPD."},
+  {type:"mc", q:"Hypoventilation leads to which acid-base disturbance?",
+   options:["Loss of CO₂","Retention of CO₂ (respiratory acidosis)","Increased oxygen levels","No change in CO₂"], answer:1,
+   rationale:"<b>Hypoventilation retains CO₂</b>, causing respiratory acidosis; hyperventilation does the opposite (blows off CO₂)."},
+  {type:"sata", q:"Which are oxygen-safety measures the nurse teaches a patient using home oxygen?",
+   options:["No smoking or open flames near oxygen","Secure the oxygen tank to prevent falling","Use petroleum-based lip balm freely","Keep oxygen away from heat sources","Post 'Oxygen in Use' signage"], answers:[0,1,3,4],
+   rationale:"Oxygen supports combustion: no flames/smoking, secure the tank, keep away from heat, and post signage. <b>Avoid petroleum-based products</b> (flammable) — use water-based instead."},
+],
+"ch48":[
+  {type:"mc", q:"A pressure injury with partial-thickness skin loss presenting as a shallow open ulcer or intact/ruptured blister is:",
+   options:["Stage 1","Stage 2","Stage 3","Unstageable"], answer:1,
+   rationale:"<b>Stage 2</b> = partial-thickness loss of dermis (shallow open ulcer or blister). Stage 1 is intact skin with non-blanchable redness."},
+  {type:"mc", q:"A localized area of maroon/purple intact skin or a blood-filled blister from pressure damage to underlying tissue describes:",
+   options:["Stage 1","Stage 3","Deep tissue injury (DTI)","Stage 2"], answer:2,
+   rationale:"<b>Deep tissue injury</b> = persistent non-blanchable deep red/maroon/purple discoloration or blood-filled blister over intact or broken skin."},
+  {type:"mc", q:"On the Braden Scale, a LOWER total score indicates:",
+   options:["Lower risk for pressure injury","Higher risk for pressure injury","No risk","Healed skin"], answer:1,
+   rationale:"On the Braden Scale, <b>lower scores = higher risk</b>. Subscales: sensory perception, moisture, activity, mobility, nutrition, friction/shear."},
+  {type:"mc", q:"When a patient at risk for pressure injury sits in a chair, the nurse should limit sitting time to:",
+   options:["2 hours or less, with weight shifts","8 hours","Once per shift only","No limit if cushioned"], answer:0,
+   rationale:"Limit chair sitting to <b>≤ 2 hours</b> and encourage frequent weight shifts; seated pressure over the ischium is intense."},
+  {type:"sata", q:"Which parameters should the nurse include when assessing a wound?",
+   options:["Size (length, width, depth)","Type and amount of drainage","Color of the wound bed","The patient's astrological sign","Presence of odor or signs of infection"], answers:[0,1,2,4],
+   rationale:"Assess size, drainage, wound-bed appearance/color, surrounding skin, odor, and infection signs to track healing."},
+  {type:"mc", q:"Applying cold therapy to a fresh injury helps because it:",
+   options:["Increases blood flow and edema","Causes vasoconstriction, reducing edema and bleeding","Promotes infection","Increases metabolic demand"], answer:1,
+   rationale:"Cold causes <b>vasoconstriction</b>, limiting edema, bleeding, and providing local anesthesia; useful in the first 24–48 hours after injury."},
+],
+};
+
+const DOSAGE = { id:"chDose", num:"Rx", title:"Dosage Calculations", questions:[
+  {type:"calc", unit:"tablet(s)", answer:2, tol:0.01,
+   q:"Order: digoxin 0.25 mg PO daily. Available: digoxin 0.125 mg tablets. How many tablets will the nurse give? (Round to the nearest whole or half tablet.)",
+   rationale:"<b>Desired ÷ Have</b> = 0.25 mg ÷ 0.125 mg = <b>2 tablets</b>."},
+  {type:"calc", unit:"mL", answer:8, tol:0.05,
+   q:"Order: amoxicillin 400 mg PO. Available: amoxicillin 250 mg / 5 mL. How many mL will the nurse give? (Round to the nearest tenth.)",
+   rationale:"(Desired ÷ Have) × Quantity = (400 ÷ 250) × 5 = 1.6 × 5 = <b>8 mL</b>."},
+  {type:"calc", unit:"mL/hr", answer:125, tol:0.5,
+   q:"Order: infuse 1000 mL of 0.9% NaCl over 8 hours via pump. What is the rate in mL/hr? (Round to the nearest whole number.)",
+   rationale:"Total volume ÷ hours = 1000 mL ÷ 8 hr = <b>125 mL/hr</b>."},
+  {type:"calc", unit:"gtt/min", answer:31, tol:0.5,
+   q:"Order: infuse 1000 mL over 8 hours. Drop factor: 15 gtt/mL. What is the flow rate in gtt/min? (Round to the nearest whole drop.)",
+   rationale:"(Volume × drop factor) ÷ total minutes = (1000 × 15) ÷ (8 × 60) = 15000 ÷ 480 = 31.25 ≈ <b>31 gtt/min</b>."},
+  {type:"calc", unit:"gtt/min", answer:42, tol:0.5,
+   q:"Order: infuse 500 mL over 4 hours. Drop factor: 20 gtt/mL. Calculate gtt/min. (Round to the nearest whole drop.)",
+   rationale:"(500 × 20) ÷ (4 × 60) = 10000 ÷ 240 = 41.7 ≈ <b>42 gtt/min</b>."},
+  {type:"calc", unit:"mg", answer:200, tol:0.5,
+   q:"A child weighs 44 lb. The order is 10 mg/kg per dose. How many mg per dose? (First convert lb to kg: 2.2 lb = 1 kg. Round to the nearest whole mg.)",
+   rationale:"44 lb ÷ 2.2 = 20 kg; 20 kg × 10 mg/kg = <b>200 mg</b>."},
+  {type:"calc", unit:"mL", answer:1.5, tol:0.05,
+   q:"Order: gentamicin 60 mg IV. Available: gentamicin 40 mg/mL. How many mL? (Round to the nearest tenth.)",
+   rationale:"60 mg ÷ 40 mg/mL = <b>1.5 mL</b>."},
+  {type:"calc", unit:"mL/hr", answer:10, tol:0.1,
+   q:"Heparin 25,000 units in 250 mL D5W is ordered to infuse at 1000 units/hr. What pump rate in mL/hr? (Round to the nearest whole number.)",
+   rationale:"Concentration = 25,000 units ÷ 250 mL = 100 units/mL. Rate = 1000 units/hr ÷ 100 units/mL = <b>10 mL/hr</b>."},
+  {type:"calc", unit:"units/hr", answer:750, tol:1,
+   q:"A heparin bag contains 25,000 units in 500 mL and is infusing at 15 mL/hr. How many units/hr is the patient receiving? (Round to the nearest whole unit.)",
+   rationale:"Concentration = 25,000 ÷ 500 = 50 units/mL. 15 mL/hr × 50 units/mL = <b>750 units/hr</b>."},
+  {type:"calc", unit:"mg", answer:100, tol:0.5,
+   q:"Lidocaine is supplied as a 2% solution. How many mg of lidocaine are in 5 mL? (Hint: a 2% solution = 2 g/100 mL. Round to the nearest whole mg.)",
+   rationale:"2% = 2 g/100 mL = 20 mg/mL. 20 mg/mL × 5 mL = <b>100 mg</b>."},
+  {type:"calc", unit:"tablet(s)", answer:1.5, tol:0.01,
+   q:"Order: prednisone 7.5 mg PO. Available: scored 5 mg tablets. How many tablets? (Round to the nearest half tablet.)",
+   rationale:"7.5 mg ÷ 5 mg = <b>1.5 tablets</b> (a scored tablet may be halved)."},
+  {type:"calc", unit:"mL/hr", answer:167, tol:0.5,
+   q:"Order: infuse 250 mL over 90 minutes via pump. What is the rate in mL/hr? (Round to the nearest whole number.)",
+   rationale:"250 mL ÷ (90 ÷ 60) hr = 250 ÷ 1.5 = 166.7 ≈ <b>167 mL/hr</b>."},
+  {type:"calc", unit:"gtt/min", answer:100, tol:0.5,
+   q:"Order: infuse 50 mL over 30 minutes using microdrip tubing (60 gtt/mL). Calculate gtt/min. (Round to the nearest whole drop.)",
+   rationale:"(50 × 60) ÷ 30 = 3000 ÷ 30 = <b>100 gtt/min</b>. (With microdrip, gtt/min equals mL/hr.)"},
+  {type:"calc", unit:"mg", answer:184, tol:0.5,
+   q:"A child weighs 23 kg. The order is 8 mg/kg per dose. How many mg per dose? (Round to the nearest whole mg.)",
+   rationale:"23 kg × 8 mg/kg = <b>184 mg</b>."},
+  {type:"calc", unit:"tablet(s)", answer:2, tol:0.01,
+   q:"Order: levothyroxine 0.1 mg PO daily. Available: levothyroxine 0.05 mg tablets. How many tablets? (Round to the nearest whole/half tablet.)",
+   rationale:"0.1 mg ÷ 0.05 mg = <b>2 tablets</b>."},
+]};
+
+EXAM.forEach(ch=>{ if(EXTRA[ch.id]) ch.questions = ch.questions.concat(EXTRA[ch.id]); });
+EXAM.push(DOSAGE);
+const EXTRA3 = {"ch24": [{"type": "mc", "q": "A nurse is bathing a patient and performing a sterile dressing change. Which zone of personal space is being used?", "options": ["Social", "Personal", "Intimate", "Public"], "answer": 2, "rationale": "Hands-on care such as bathing and dressing changes occurs within the intimate zone (0\u201318 inches)."}, {"type": "mc", "q": "Using SBAR during a hand-off, what does the \"R\" stand for?", "options": ["Report", "Recommendation", "Response", "Rationale"], "answer": 1, "rationale": "SBAR = Situation, Background, Assessment, Recommendation. \"R\" is the nurse's recommendation or request."}, {"type": "mc", "q": "A nurse presents health information to an audience at a community center. Which level of communication is this?", "options": ["Intrapersonal", "Interpersonal", "Small group", "Public"], "answer": 3, "rationale": "Public communication is interaction with a large audience, such as a community presentation."}, {"type": "mc", "q": "A patient points to the area of pain without speaking. This is an example of:", "options": ["Verbal communication", "Nonverbal communication (gesture)", "Intrapersonal communication", "Written communication"], "answer": 1, "rationale": "Gestures such as pointing are a form of nonverbal communication."}, {"type": "sata", "q": "Which responses are NONtherapeutic communication techniques?", "options": ["Offering false reassurance", "Asking \"why\" questions", "Using open-ended questions", "Giving unsolicited advice", "Changing the subject"], "answers": [0, 1, 3, 4], "rationale": "False reassurance, \"why\" questions, giving advice, and changing the subject all block communication. Open-ended questions are therapeutic."}, {"type": "mc", "q": "Which nursing action best supports communication with an older adult who is cognitively intact?", "options": ["Speak in a high-pitched, childlike tone", "Communicate on an adult level without patronizing", "Finish the patient's sentences to save time", "Avoid eye contact to seem less threatening"], "answer": 1, "rationale": "Communicate with older adults on an adult level; avoid \"elderspeak\" or condescending tones."}, {"type": "mc", "q": "Encouraging an older adult to share life stories and reminisce primarily:", "options": ["Wastes valuable assessment time", "Has a therapeutic effect and increases sense of well-being", "Should be discouraged", "Is only appropriate at end of life"], "answer": 1, "rationale": "Reminiscence has a therapeutic effect and increases an older adult's sense of well-being."}, {"type": "mc", "q": "A patient who is intubated cannot speak. Which is the most appropriate nursing intervention?", "options": ["Wait until the tube is removed to communicate", "Provide a communication board or writing tools and yes/no questions", "Speak only to the family", "Increase sedation to reduce frustration"], "answer": 1, "rationale": "For a patient who cannot speak (intubation, aphasia), provide alternative communication methods such as a board, gestures, or yes/no questions."}], "ch25": [{"type": "mc", "q": "A patient verbalizes acceptance of a new diabetes diagnosis and expresses willingness to change. This reflects which learning domain?", "options": ["Cognitive", "Affective", "Psychomotor", "Kinesthetic"], "answer": 1, "rationale": "The affective domain deals with feelings, attitudes, values, and acceptance."}, {"type": "mc", "q": "Which domain of learning includes all intellectual behaviors that require thinking and knowledge?", "options": ["Affective", "Psychomotor", "Cognitive", "Spiritual"], "answer": 2, "rationale": "Cognitive learning includes intellectual behaviors (knowing, comprehending, applying) and requires thinking."}, {"type": "mc", "q": "A well-written learning objective describes:", "options": ["What the nurse will teach", "What the learner will be able to do after instruction", "The disease pathophysiology", "The nurse's documentation plan"], "answer": 1, "rationale": "Learning objectives describe what the learner will be able to do after successful instruction."}, {"type": "mc", "q": "When teaching a patient with low health literacy, the nurse should:", "options": ["Save the most important information for the end", "Present the most important information first", "Use complex medical terminology", "Provide only written pamphlets"], "answer": 1, "rationale": "For patients with low literacy or learning disability, include the most important information at the beginning of the session."}, {"type": "mc", "q": "Which is the best way to evaluate whether a patient has mastered a psychomotor skill before discharge?", "options": ["Ask if they understand", "Have them perform a return demonstration under home-like conditions", "Give a written quiz", "Provide a video to watch"], "answer": 1, "rationale": "Return demonstration under the conditions the patient will experience at home best confirms mastery of a skill."}, {"type": "sata", "q": "Which factors are barriers that reduce a patient's ability to learn?", "options": ["Unrelieved pain", "High anxiety", "A quiet, well-lit room", "Low reading level", "Patient motivation"], "answers": [0, 1, 3], "rationale": "Pain, anxiety, and low literacy impair learning. A good environment and motivation enhance it."}, {"type": "mc", "q": "A nurse praises a patient and offers a small reward after a successful self-care demonstration. These are examples of:", "options": ["Reinforcers", "Barriers", "Objectives", "Diagnoses"], "answer": 0, "rationale": "Reinforcers (social, material, and activity types) strengthen learning and desired behaviors."}, {"type": "mc", "q": "Which teaching approach is most developmentally appropriate for a preschool-age child?", "options": ["Detailed lecture with handouts", "Use of play (e.g., bandaging a doll)", "Written self-study modules", "Group discussion of pathophysiology"], "answer": 1, "rationale": "Play (handling equipment, bandaging a doll) is an appropriate teaching strategy for toddlers and preschoolers."}], "ch26": [{"type": "mc", "q": "In a source-oriented record, information is organized by:", "options": ["The patient's problems", "Each discipline having its own separate section", "Date only", "Color codes"], "answer": 1, "rationale": "In a source record, each discipline (nursing, medicine, respiratory, etc.) documents in its own separate section."}, {"type": "mc", "q": "What is the primary purpose of a properly performed hand-off report?", "options": ["To assign blame for errors", "To ensure patient safety and continuity of care", "To fulfill billing requirements", "To replace the medical record"], "answer": 1, "rationale": "A hand-off report shares essential information to ensure patient safety and continuity of care across providers/shifts."}, {"type": "mc", "q": "When taking a telephone order (TO) from a provider, the nurse should:", "options": ["Write it down/enter it and read it back to verify", "Carry it out and document later", "Ask another nurse to remember it", "Wait for a written order before acting"], "answer": 0, "rationale": "Write or enter the complete order as it is given, then read it back to verify accuracy before carrying it out."}, {"type": "mc", "q": "To document that a medication was given in units, the nurse should write:", "options": ["10 U", "10 units", "10 u", "ten U"], "answer": 1, "rationale": "\"U\" is on the do-not-use abbreviation list (mistaken for 0/4); always write out \"units.\""}, {"type": "mc", "q": "Which is the most appropriate content for a change-of-shift report?", "options": ["Subjective opinions about the patient", "Significant changes stated in measurable terms (e.g., pain 8/10)", "Personal commentary about the family", "Every routine task performed"], "answer": 1, "rationale": "Change-of-shift reports include significant changes in measurable, objective terms and key observations \u2014 not opinions."}, {"type": "mc", "q": "When should the nurse document nursing care?", "options": ["At the end of the shift only", "Promptly after the care is provided", "Before the care is provided", "Only if something goes wrong"], "answer": 1, "rationale": "Chart promptly after care to keep the record current and accurate; never document before care is given."}, {"type": "sata", "q": "Which elements should be included in an effective hand-off report?", "options": ["Patient identification and current status", "Significant changes in measurable terms", "Care still to be completed and priorities", "Gossip about the patient's family", "Pending tests or treatments"], "answers": [0, 1, 2, 4], "rationale": "Hand-offs include ID/status, measurable changes, outstanding tasks/priorities, and pending tests. Opinions/gossip are inappropriate."}, {"type": "mc", "q": "A patient falls and an incident/occurrence report is completed. How should this be handled in the chart?", "options": ["Attach the report to the chart", "Document the objective facts of the fall without referencing the report", "Write 'incident report filed' in the notes", "Do not document the event"], "answer": 1, "rationale": "Document the objective facts and assessment in the record, but do not reference or file the incident report in the chart."}], "ch30": [{"type": "mc", "q": "Vesicular breath sounds heard over most lung fields are:", "options": ["Adventitious and abnormal", "Normal soft sounds with a longer inspiratory phase", "A sign of consolidation", "Always indicative of pneumonia"], "answer": 1, "rationale": "Vesicular sounds are normal, soft, low-pitched sounds heard over most lung fields, with inspiration longer than expiration."}, {"type": "mc", "q": "A patient's stool is black and tarry. The nurse documents this as melena, which indicates:", "options": ["Normal finding", "Upper gastrointestinal bleeding", "Recent green vegetable intake", "Liver failure"], "answer": 1, "rationale": "Melena (black, tarry stool) indicates gastrointestinal bleeding and warrants follow-up."}, {"type": "mc", "q": "A nonambulatory patient needs a rectal examination. Which position is best?", "options": ["Lithotomy", "Sims' (side-lying)", "Prone", "High Fowler's"], "answer": 1, "rationale": "The side-lying Sims' position is preferred for rectal assessment in nonambulatory patients."}, {"type": "mc", "q": "In a patient with allergic rhinitis, the nasal mucosa typically appears:", "options": ["Bright red with purulent discharge", "Pale with clear, watery discharge", "Black and necrotic", "Normal with no discharge"], "answer": 1, "rationale": "Allergic rhinitis classically presents with pale nasal mucosa and clear, watery (mucoid) discharge."}, {"type": "mc", "q": "Normal visual acuity measured with a Snellen chart is documented as:", "options": ["20/40", "20/20", "20/100", "20/10 always"], "answer": 1, "rationale": "Normal vision is 20/20 \u2014 the patient reads at 20 feet what a person with normal vision reads at 20 feet."}, {"type": "mc", "q": "Why must the nurse clean the stethoscope between patients?", "options": ["To improve sound quality only", "Because bacteria and viruses transfer on contaminated equipment", "It is optional if visibly clean", "Only in the ICU"], "answer": 1, "rationale": "Pathogens (including MRSA) transfer via shared equipment; clean the diaphragm/bell before reuse on another patient."}, {"type": "mc", "q": "During a testicular exam, the nurse palpates an irregular, hard lump. This finding may indicate:", "options": ["Normal epididymis", "Possible testicular cancer requiring follow-up", "Smegma", "A hydrocele that needs no action"], "answer": 1, "rationale": "Irregular, firm lumps of the testes may indicate testicular cancer and require prompt evaluation."}, {"type": "sata", "q": "Which are correct techniques during the inspection phase of assessment?", "options": ["Ensure adequate lighting", "Compare side-to-side for symmetry", "Use a direct light source for body cavities", "Palpate deeply for masses", "Note color, size, shape, and position"], "answers": [0, 1, 2, 4], "rationale": "Inspection uses good lighting, symmetry comparison, direct light for cavities, and notes color/size/shape/position. Deep palpation is a different technique."}], "ch38": [{"type": "mc", "q": "Which is an example of isotonic exercise?", "options": ["Quadriceps setting without movement", "Walking or swimming", "Holding a plank statically", "Pelvic floor (Kegel) contractions"], "answer": 1, "rationale": "Isotonic exercise involves muscle shortening with active movement (walking, swimming). Isometric exercise creates tension without movement."}, {"type": "mc", "q": "To improve stability before moving a patient, the nurse should:", "options": ["Bring the feet close together", "Widen the stance to broaden the base of support", "Keep the load at arm's length", "Straighten and lock the knees"], "answer": 1, "rationale": "A wider base of support and lower center of gravity improve balance and stability."}, {"type": "mc", "q": "Body alignment (posture) refers to:", "options": ["The speed of walking", "The relationship of body parts to one another while standing, sitting, or lying", "Muscle strength only", "The number of joints in motion"], "answer": 1, "rationale": "Body alignment/posture is the positioning of joints, tendons, ligaments, and muscles in various positions."}, {"type": "mc", "q": "Which device best reduces friction when moving a patient up in bed?", "options": ["A draw/slide sheet or friction-reducing device", "A pillow under the head", "A bedside commode", "A gait belt alone"], "answer": 0, "rationale": "Friction-reducing devices (slide sheets, low-friction boards) reduce shear and protect both patient skin and staff backs."}, {"type": "sata", "q": "Which findings indicate a patient's activity tolerance has been exceeded?", "options": ["Dyspnea", "Dizziness", "Steady heart rate at baseline", "Chest pain", "Marked, sustained rise in heart rate"], "answers": [0, 1, 3, 4], "rationale": "Dyspnea, dizziness, chest pain, and an excessive/sustained heart-rate rise signal intolerance \u2014 stop and rest the patient."}, {"type": "mc", "q": "To protect the back when lifting, the nurse should:", "options": ["Twist at the waist toward the load", "Pivot the whole body and face the direction of movement", "Keep knees locked", "Hold the object away from the body"], "answer": 1, "rationale": "Pivot (don't twist the spine) and face the direction of movement; keep the load close and use leg muscles."}, {"type": "mc", "q": "Acetylcholine is best described as:", "options": ["A type of joint", "A neurotransmitter that transmits impulses across the neuromuscular junction", "A bone in the forearm", "A balance reflex"], "answer": 1, "rationale": "Acetylcholine is a neurotransmitter that transfers electrical impulses across the neuromuscular junction to produce movement."}, {"type": "mc", "q": "Although isometric contractions do not shorten the muscle, they:", "options": ["Decrease energy expenditure", "Increase energy expenditure and help maintain muscle strength", "Cause joint movement", "Are unsafe for bedrest patients"], "answer": 1, "rationale": "Isometric contractions increase energy expenditure and help preserve muscle strength/tone even without joint movement \u2014 useful on bedrest."}], "ch39": [{"type": "mc", "q": "Which psychosocial effect is common in a patient experiencing prolonged immobility?", "options": ["Improved mood", "Depression and altered self-concept", "Increased independence", "Heightened alertness"], "answer": 1, "rationale": "Immobility often causes depression and changes in role and self-concept due to loss of independence."}, {"type": "mc", "q": "Disuse osteoporosis during immobility results from:", "options": ["Increased bone formation", "Calcium resorption from bones into the bloodstream", "Excess vitamin D", "Increased weight-bearing"], "answer": 1, "rationale": "Without weight-bearing stress, bones lose calcium (resorption), causing disuse osteoporosis and raising fracture/calculi risk."}, {"type": "mc", "q": "Constipation is a common GI complication of immobility primarily because of:", "options": ["Increased peristalsis", "Decreased peristalsis and reduced fluid/activity", "Excess fiber", "Increased appetite"], "answer": 1, "rationale": "Immobility slows peristalsis; with reduced activity and often reduced intake, stool becomes hard and constipation develops."}, {"type": "mc", "q": "Pooled respiratory secretions in an immobile patient most directly increase the risk of:", "options": ["Hypertension", "Hypostatic pneumonia", "Renal calculi", "Contractures"], "answer": 1, "rationale": "Stasis of secretions promotes hypostatic pneumonia; turning, coughing, deep breathing, and spirometry help prevent it."}, {"type": "sata", "q": "Which interventions help prevent deep vein thrombosis in an immobile patient?", "options": ["Early ambulation when able", "Sequential compression devices", "Maintaining hydration", "Vigorously massaging the calves", "Prescribed anticoagulant therapy"], "answers": [0, 1, 2, 4], "rationale": "Mobility, SCDs, hydration, and anticoagulants prevent DVT. Never massage the calves \u2014 it can dislodge a clot."}, {"type": "mc", "q": "The nursing diagnosis Impaired physical mobility applies to a patient who:", "options": ["Is completely immobile and cannot be repositioned", "Has some movement limitation but is not completely immobile", "Has no movement limitations", "Refuses all care"], "answer": 1, "rationale": "Impaired physical mobility applies when the patient has a limitation in movement but is not completely immobile."}, {"type": "mc", "q": "Which is an appropriately written, measurable goal for an immobile patient?", "options": ["The patient will feel better", "The patient will walk 1000 feet with a walker by discharge", "The patient will be more active", "The patient will not get a clot"], "answer": 1, "rationale": "Goals should be individualized, realistic, and measurable \u2014 distance, device, and timeframe make this one measurable."}, {"type": "mc", "q": "How should the nurse position an immobilized patient to accurately assess body alignment?", "options": ["Supine and flat", "Lateral (side-lying)", "Sitting in a chair", "Prone"], "answer": 1, "rationale": "Assess alignment in the lateral position after removing positioning aids that might mask abnormalities."}], "ch40": [{"type": "mc", "q": "When cleaning a patient's dentures, the nurse should:", "options": ["Scrub them over a hard sink edge", "Clean over a basin of water or a towel and store in water/solution", "Use very hot water to disinfect", "Leave them to air-dry uncovered"], "answer": 1, "rationale": "Clean dentures over a basin lined with water or a towel to prevent breakage if dropped; store moist to prevent warping."}, {"type": "mc", "q": "For a patient with diabetes, the nurse should teach to:", "options": ["Soak the feet daily in hot water", "Cut toenails straight across and inspect feet daily", "Walk barefoot indoors", "Use a heating pad on the feet"], "answer": 1, "rationale": "Diabetic foot care: inspect daily, wash with warm (not hot) water, cut nails straight across, never go barefoot, and avoid heating pads (neuropathy)."}, {"type": "sata", "q": "Which actions protect an unconscious patient during oral care?", "options": ["Position side-lying with head turned to the side", "Have suction available", "Lay the patient flat and supine", "Use a soft swab/toothette", "Place fingers between the teeth to hold the mouth open"], "answers": [0, 1, 3], "rationale": "Side-lying with suction available and a soft swab prevents aspiration. Never lay them flat, and never place fingers in the mouth (bite/injury risk)."}, {"type": "mc", "q": "During a complete bed bath, the nurse generally washes:", "options": ["From the dirtiest to the cleanest area", "From the cleanest area (eyes/face) toward dirtier areas", "The perineum first", "In random order"], "answer": 1, "rationale": "Bathe from cleanest to dirtiest (face/eyes first, perineum last) to limit spread of microorganisms."}, {"type": "mc", "q": "A patient receiving anticoagulant therapy needs shaving. The nurse should use:", "options": ["A straight razor", "An electric razor", "No shaving is ever allowed", "A disposable double-blade razor"], "answer": 1, "rationale": "Use an electric razor for patients on anticoagulants or with bleeding risk to avoid nicks and bleeding."}, {"type": "mc", "q": "What distinguishes head lice from dandruff on inspection?", "options": ["Dandruff attaches firmly to the hair shaft", "Lice/nits attach to the hair shaft and scalp, while dandruff flakes off easily", "They are identical", "Lice cause no itching"], "answer": 1, "rationale": "Nits (lice eggs) attach firmly to hair shafts near the scalp; dandruff is loose scaling that flakes off."}, {"type": "mc", "q": "What is the correct technique for removing an attached tick?", "options": ["Burn it off with a match", "Grasp close to the head with tweezers and pull upward with steady pressure", "Twist it sharply", "Squeeze the body firmly"], "answer": 1, "rationale": "Use tweezers to grasp the tick as close to the head/skin as possible and pull straight up with even, steady pressure."}, {"type": "mc", "q": "Why is moisture on the skin a concern for skin integrity?", "options": ["It strengthens the skin", "It is a medium for bacterial growth and causes maceration", "It improves circulation", "It has no effect"], "answer": 1, "rationale": "Moisture promotes bacterial growth and macerates/softens skin, increasing breakdown risk \u2014 keep skin clean and dry."}], "ch41": [{"type": "mc", "q": "Which oxygen delivery device provides the HIGHEST oxygen concentration?", "options": ["Nasal cannula", "Simple face mask", "Non-rebreather mask", "Venturi mask at lowest setting"], "answer": 2, "rationale": "A non-rebreather mask with reservoir bag and one-way valves delivers the highest FiO2 (up to ~90\u2013100%)."}, {"type": "mc", "q": "Left-sided heart failure most directly causes:", "options": ["Peripheral/dependent edema", "Pulmonary congestion with crackles and dyspnea", "Jugular vein distention only", "Hepatomegaly"], "answer": 1, "rationale": "Left-sided failure backs blood into the lungs \u2192 pulmonary congestion, crackles, and shortness of breath."}, {"type": "mc", "q": "Right-sided heart failure most directly causes:", "options": ["Pulmonary edema", "Systemic venous congestion (peripheral edema, JVD)", "Crackles in the lungs", "Pink frothy sputum"], "answer": 1, "rationale": "Right-sided failure backs blood into the systemic circulation \u2192 peripheral edema, JVD, and hepatomegaly."}, {"type": "mc", "q": "Cardiac output is calculated by:", "options": ["Heart rate divided by stroke volume", "Stroke volume multiplied by heart rate", "Blood pressure times heart rate", "Preload minus afterload"], "answer": 1, "rationale": "Cardiac output = stroke volume \u00d7 heart rate, reflecting how much blood is circulated systemically."}, {"type": "mc", "q": "In a patient with dark skin, the nurse best assesses for cyanosis by checking:", "options": ["The fingernails only", "Translucent, high-blood-flow areas such as mucous membranes and conjunctivae", "The soles of the feet", "The hair"], "answer": 1, "rationale": "In darkly pigmented skin, assess mucous membranes, lips, conjunctivae, and palms/soles for cyanosis rather than relying on skin color."}, {"type": "mc", "q": "Before suctioning a patient's airway, the nurse should:", "options": ["Apply continuous suction for 30 seconds", "Hyperoxygenate the patient", "Withhold oxygen entirely", "Instill large amounts of saline"], "answer": 1, "rationale": "Hyperoxygenate before and between suction passes, and limit each pass to 10\u201315 seconds to prevent hypoxia."}, {"type": "sata", "q": "Which interventions help mobilize and clear airway secretions?", "options": ["Adequate hydration to thin secretions", "Coughing and deep breathing", "Keeping the patient flat and still", "Positioning/turning and ambulation", "Incentive spirometry"], "answers": [0, 1, 3, 4], "rationale": "Hydration, coughing/deep breathing, repositioning/ambulation, and spirometry clear secretions. Lying flat and still promotes pooling."}, {"type": "mc", "q": "Fever affects oxygenation because it:", "options": ["Decreases metabolic demand", "Increases metabolic demand and carbon dioxide production", "Has no effect on respiration", "Lowers the respiratory rate"], "answer": 1, "rationale": "Fever raises the metabolic rate, increasing oxygen demand and CO2 production, which increases the work of breathing."}], "ch48": [{"type": "mc", "q": "Red, moist tissue containing new blood vessels in a healing wound bed is called:", "options": ["Slough", "Eschar", "Granulation tissue", "Purulent exudate"], "answer": 2, "rationale": "Granulation tissue is red, moist tissue of new blood vessels that indicates the wound is progressing toward healing."}, {"type": "mc", "q": "A deep open wound (e.g., a pressure injury) that is left open and heals by granulation, contraction, and epithelialization heals by:", "options": ["Primary intention", "Secondary intention", "Tertiary intention", "No healing occurs"], "answer": 1, "rationale": "Wounds with tissue loss left open to heal by granulation heal by secondary intention, which takes longer than primary."}, {"type": "mc", "q": "A wound left open initially and then surgically closed days later (e.g., after infection clears) heals by:", "options": ["Primary intention", "Secondary intention", "Tertiary intention (delayed primary closure)", "Regeneration only"], "answer": 2, "rationale": "Tertiary intention (delayed primary closure) is when a wound is intentionally left open, then closed later once contamination/edema resolves."}, {"type": "mc", "q": "The nurse notes that the layers of a surgical wound have separated. This complication is called:", "options": ["Evisceration", "Dehiscence", "Hematoma", "Fistula"], "answer": 1, "rationale": "Dehiscence is partial or total separation of wound layers. If organs protrude through the opening, it becomes evisceration (an emergency)."}, {"type": "mc", "q": "Which nutrient is especially important to support wound healing?", "options": ["Protein", "Simple sugars", "Saturated fat", "Sodium"], "answer": 0, "rationale": "Protein needs are increased to support tissue repair and collagen synthesis; vitamin C and zinc also aid healing."}, {"type": "sata", "q": "Which findings suggest a wound infection?", "options": ["Purulent (thick, colored) drainage", "Increasing pain and warmth", "Decreasing erythema and clean granulation", "Fever", "Foul odor"], "answers": [0, 1, 3, 4], "rationale": "Purulent drainage, increasing pain/warmth, fever, and foul odor indicate infection. Decreasing redness with clean granulation is a sign of healing."}, {"type": "mc", "q": "Before performing a painful dressing change, the nurse should:", "options": ["Withhold pain medication to assess the wound", "Administer ordered analgesia about 30 minutes beforehand", "Remove the dressing as quickly as possible without preparation", "Delay the change indefinitely"], "answer": 1, "rationale": "Give an ordered analgesic ~30 minutes before exposing/changing a painful wound to improve comfort and cooperation."}, {"type": "mc", "q": "A healing stage III pressure injury is now shallower. How is it staged?", "options": ["Re-stage it as stage II", "Keep it labeled stage III ('healing')", "Re-stage it as stage I", "Call it unstageable"], "answer": 1, "rationale": "Pressure injuries are NOT reverse/down-staged. A healing stage III remains a (healing) stage III because lost tissue heals by scar, not regeneration."}], "chDose": [{"type": "calc", "unit": "tablet(s)", "answer": 2, "tol": 0.01, "q": "Order: metformin 500 mg PO. Available: 250 mg tablets. How many tablets? (Round to the nearest whole/half tablet.)", "rationale": "500 mg \u00f7 250 mg = 2 tablets."}, {"type": "calc", "unit": "mL", "answer": 15, "tol": 0.05, "q": "Order: cephalexin 750 mg PO. Available: 250 mg / 5 mL. How many mL? (Round to the nearest tenth.)", "rationale": "(750 \u00f7 250) \u00d7 5 = 3 \u00d7 5 = 15 mL."}, {"type": "calc", "unit": "mL/hr", "answer": 125, "tol": 0.5, "q": "Order: infuse 1500 mL over 12 hours via pump. Rate in mL/hr? (Round to the nearest whole number.)", "rationale": "1500 mL \u00f7 12 hr = 125 mL/hr."}, {"type": "calc", "unit": "gtt/min", "answer": 17, "tol": 0.5, "q": "Order: infuse 100 mL over 60 minutes. Drop factor 10 gtt/mL. gtt/min? (Round to the nearest whole drop.)", "rationale": "(100 \u00d7 10) \u00f7 60 = 1000 \u00f7 60 = 16.7 \u2248 17 gtt/min."}, {"type": "calc", "unit": "mg", "answer": 450, "tol": 0.5, "q": "A child weighs 30 kg. Order: 15 mg/kg per dose. How many mg per dose? (Round to the nearest whole mg.)", "rationale": "30 kg \u00d7 15 mg/kg = 450 mg."}, {"type": "calc", "unit": "units/hr", "answer": 400, "tol": 1, "q": "Heparin 10,000 units in 500 mL is infusing at 20 mL/hr. How many units/hr? (Round to the nearest whole unit.)", "rationale": "Concentration = 10,000 \u00f7 500 = 20 units/mL. 20 mL/hr \u00d7 20 units/mL = 400 units/hr."}, {"type": "calc", "unit": "mg", "answer": 150, "tol": 0.5, "q": "A child weighs 66 lb. Order: 5 mg/kg per dose. How many mg? (Convert lb to kg: 2.2 lb = 1 kg. Round to the nearest whole mg.)", "rationale": "66 \u00f7 2.2 = 30 kg; 30 \u00d7 5 = 150 mg."}, {"type": "calc", "unit": "mL", "answer": 0.8, "tol": 0.02, "q": "Order: morphine 0.4 mg IV. Available: 0.5 mg/mL. How many mL? (Round to the nearest tenth.)", "rationale": "0.4 mg \u00f7 0.5 mg/mL = 0.8 mL."}]};
+EXAM.forEach(ch=>{ if(EXTRA3[ch.id]) ch.questions = ch.questions.concat(EXTRA3[ch.id]); });
+
+
+/* ============ RENDER ============ */
+const examEl = document.getElementById('exam');
+const chipsEl = document.getElementById('chips');
+let TOTAL = 0;
+const state = {}; // qkey -> {answered:bool, correct:bool}
+
+function letter(i){return String.fromCharCode(65+i);}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+EXAM.forEach((ch, ci)=>{
+  // chip
+  const chip=document.createElement('button');
+  chip.textContent="Ch "+ch.num;
+  chip.onclick=()=>document.getElementById(ch.id).scrollIntoView({behavior:'smooth'});
+  chipsEl.appendChild(chip);
+
+  const sec=document.createElement('section');
+  sec.className='chapter';sec.id=ch.id;
+  const head=document.createElement('div');head.className='chapter-head';
+  head.innerHTML=`<span class="chapter-num">CH ${ch.num}</span><h2 class="chapter-title">${ch.title}</h2><span class="chapter-score" id="cs-${ch.id}"></span>`;
+  sec.appendChild(head);
+
+  ch.questions.forEach((q, qi)=>{
+    TOTAL++;
+    const qkey=ch.id+'-'+qi;
+    const card=document.createElement('div');card.className='q';card.dataset.key=qkey;card.dataset.chap=ch.id;
+
+    let tag = q.type==='sata' ? 'Select All That Apply' : (q.type==='matching' ? 'Matching' : (q.type==='calc' ? 'Dosage Calculation' : 'Multiple Choice'));
+    const hint = q.type==='sata' ? '<span class="hint">One, some, or all responses may be correct.</span>' : '';
+    card.innerHTML=`<div class="q-top"><span class="q-no">Q${qi+1}</span><span class="q-tag">${tag}</span></div>
+      <div class="q-text">${q.q}${hint}</div>`;
+
+    const body=document.createElement('div');
+
+    if(q.type==='mc' || q.type==='sata'){
+      const opts=document.createElement('div');opts.className='opts';
+      q.options.forEach((opt,oi)=>{
+        const row=document.createElement('div');
+        row.className='opt'+(q.type==='sata'?' sata':'');
+        row.dataset.i=oi;
+        row.innerHTML=`<span class="box">✓</span><span class="ltr">${letter(oi)}.</span><span>${opt}</span>`;
+        row.onclick=()=>{
+          if(state[qkey]&&state[qkey].answered)return;
+          if(q.type==='mc'){opts.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));row.classList.add('sel');}
+          else{row.classList.toggle('sel');}
+        };
+        opts.appendChild(row);
+      });
+      body.appendChild(opts);
+    } else if(q.type==='matching'){
+      const rights=shuffle(q.pairs.map(p=>p.right));
+      q.pairs.forEach((p,pi)=>{
+        const row=document.createElement('div');row.className='match-row';row.dataset.i=pi;
+        const sel=document.createElement('select');
+        sel.innerHTML=`<option value="">— choose —</option>`+rights.map(r=>`<option value="${r.replace(/"/g,'&quot;')}">${r}</option>`).join('');
+        row.innerHTML=`<span class="match-left">${p.left}</span>`;
+        row.appendChild(sel);
+        body.appendChild(row);
+      });
+    } else if(q.type==='calc'){
+      const wrap=document.createElement('div');wrap.className='calc-wrap';
+      const inp=document.createElement('input');inp.type='number';inp.step='any';inp.className='calc-input';inp.placeholder='answer';
+      const unit=document.createElement('span');unit.className='calc-unit';unit.textContent=q.unit||'';
+      wrap.appendChild(inp);wrap.appendChild(unit);
+      body.appendChild(wrap);
+    }
+    card.appendChild(body);
+
+    const actions=document.createElement('div');actions.className='actions';
+    const btn=document.createElement('button');btn.className='btn btn-check';btn.textContent='Check answer';
+    const verdict=document.createElement('span');verdict.className='verdict';
+    actions.appendChild(btn);actions.appendChild(verdict);
+    card.appendChild(actions);
+
+    const rat=document.createElement('div');rat.className='rationale';rat.innerHTML=q.rationale;
+    card.appendChild(rat);
+
+    btn.onclick=()=>checkQuestion(q,qkey,card,body,verdict,rat,btn,ch.id);
+
+    sec.appendChild(card);
+  });
+  examEl.appendChild(sec);
+});
+
+document.getElementById('sTotal').textContent=TOTAL;
+document.getElementById('mTotal').textContent=TOTAL;
+document.getElementById('rTotal').textContent=TOTAL;
+
+/* ============ CHECK LOGIC ============ */
+function checkQuestion(q,qkey,card,body,verdict,rat,btn,chapId){
+  let correct=false;
+  if(q.type==='mc'){
+    const sel=body.querySelector('.opt.sel');
+    if(!sel){verdict.textContent='Select an answer first';verdict.className='verdict no';return;}
+    const chosen=+sel.dataset.i;
+    body.querySelectorAll('.opt').forEach(o=>{o.classList.add('locked');
+      const i=+o.dataset.i;
+      if(i===q.answer)o.classList.add('correct');
+      else if(i===chosen)o.classList.add('wrong');
+    });
+    correct=(chosen===q.answer);
+  } else if(q.type==='sata'){
+    const chosen=[...body.querySelectorAll('.opt.sel')].map(o=>+o.dataset.i).sort();
+    if(chosen.length===0){verdict.textContent='Select at least one';verdict.className='verdict no';return;}
+    const ans=q.answers.slice().sort();
+    body.querySelectorAll('.opt').forEach(o=>{o.classList.add('locked');
+      const i=+o.dataset.i;
+      const isAns=q.answers.includes(i), isSel=o.classList.contains('sel');
+      if(isAns&&isSel)o.classList.add('correct');
+      else if(!isAns&&isSel)o.classList.add('wrong');
+      else if(isAns&&!isSel)o.classList.add('miss');
+    });
+    correct=(chosen.length===ans.length&&chosen.every((v,k)=>v===ans[k]));
+  } else if(q.type==='matching'){
+    const rows=body.querySelectorAll('.match-row');
+    let allFilled=true;
+    rows.forEach(r=>{if(!r.querySelector('select').value)allFilled=false;});
+    if(!allFilled){verdict.textContent='Match every item first';verdict.className='verdict no';return;}
+    correct=true;
+    rows.forEach(r=>{
+      const i=+r.dataset.i;const sel=r.querySelector('select');
+      sel.disabled=true;
+      const right=q.pairs[i].right;
+      if(sel.value===right){r.classList.add('correct');}
+      else{r.classList.add('wrong');correct=false;
+        const fix=document.createElement('span');fix.className='fix';fix.textContent='✓ Correct: '+right;
+        r.appendChild(fix);}
+    });
+  } else if(q.type==='calc'){
+    const inp=body.querySelector('.calc-input');
+    if(inp.value===''){verdict.textContent='Enter your answer first';verdict.className='verdict no';return;}
+    const val=parseFloat(inp.value);const tol=(q.tol!==undefined)?q.tol:0.01;
+    inp.disabled=true;
+    correct=Math.abs(val-q.answer)<=tol;
+    inp.style.borderColor=correct?'var(--correct)':'var(--wrong)';
+    inp.style.background=correct?'var(--correct-bg)':'var(--wrong-bg)';
+    if(!correct){
+      const fix=document.createElement('span');fix.className='calc-unit';fix.style.color='var(--correct)';
+      fix.textContent='✓ '+q.answer+' '+(q.unit||'');
+      body.querySelector('.calc-wrap').appendChild(fix);
+    }
+  }
+
+  state[qkey]={answered:true,correct};
+  verdict.textContent=correct?'✓ Correct':'✗ Review this';
+  verdict.className='verdict '+(correct?'ok':'no');
+  rat.classList.add('show');
+  btn.disabled=true;btn.textContent='Checked';
+  updateScore();updateChapter(chapId);
+}
+
+function updateChapter(chapId){
+  const ch=EXAM.find(c=>c.id===chapId);
+  const keys=ch.questions.map((_,i)=>chapId+'-'+i);
+  const ans=keys.filter(k=>state[k]&&state[k].answered).length;
+  const cor=keys.filter(k=>state[k]&&state[k].correct).length;
+  document.getElementById('cs-'+chapId).textContent=ans?`${cor}/${ans} correct`:'';
+}
+
+function updateScore(){
+  const keys=Object.keys(state);
+  const answered=keys.length;
+  const correct=keys.filter(k=>state[k].correct).length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sAnswered').textContent=answered;
+  const pct=answered?Math.round(correct/answered*100):0;
+  document.getElementById('sPct').textContent=answered?pct+'%':'—';
+  document.getElementById('trackFill').style.width=(answered/TOTAL*100)+'%';
+
+  if(answered===TOTAL){showResults(correct,pct);}
+}
+
+function showResults(correct,pct){
+  const r=document.getElementById('results');
+  document.getElementById('rPct').textContent=Math.round(correct/TOTAL*100)+'%';
+  document.getElementById('rCorrect').textContent=correct;
+  const bd=document.getElementById('rBreak');bd.innerHTML='';
+  EXAM.forEach(ch=>{
+    const keys=ch.questions.map((_,i)=>ch.id+'-'+i);
+    const cor=keys.filter(k=>state[k]&&state[k].correct).length;
+    const d=document.createElement('div');
+    d.innerHTML=`<span>Ch ${ch.num} · ${ch.title}</span><span>${cor}/${ch.questions.length}</span>`;
+    bd.appendChild(d);
+  });
+  r.classList.add('show');
+}
+
+function revealAll(){
+  document.querySelectorAll('.q').forEach(card=>{
+    const btn=card.querySelector('.btn-check');
+    if(btn&&!btn.disabled){
+      // auto-select correct so the reveal shows answers without scoring as "your answer"
+      const key=card.dataset.key;
+    }
+  });
+  // Simpler: just show every rationale and correct marking
+  EXAM.forEach(ch=>{
+    ch.questions.forEach((q,qi)=>{
+      const card=document.querySelector(`.q[data-key="${ch.id}-${qi}"]`);
+      if(state[ch.id+'-'+qi]&&state[ch.id+'-'+qi].answered)return;
+      const body=card.children[1];
+      if(q.type==='mc'||q.type==='sata'){
+        body.querySelectorAll('.opt').forEach(o=>{o.classList.add('locked');
+          const i=+o.dataset.i;
+          const isAns=q.type==='mc'?(i===q.answer):q.answers.includes(i);
+          if(isAns)o.classList.add('correct');
+        });
+      }else if(q.type==='matching'){
+        body.querySelectorAll('.match-row').forEach(r=>{
+          const i=+r.dataset.i;const sel=r.querySelector('select');
+          sel.value=q.pairs[i].right;sel.disabled=true;r.classList.add('correct');
+        });
+      }else if(q.type==='calc'){
+        const inp=body.querySelector('.calc-input');
+        if(inp){inp.value=q.answer;inp.disabled=true;inp.style.borderColor='var(--correct)';inp.style.background='var(--correct-bg)';}
+      }
+      card.querySelector('.rationale').classList.add('show');
+      const btn=card.querySelector('.btn-check');btn.disabled=true;btn.textContent='Answer shown';
+      card.querySelector('.verdict').textContent='Answer revealed';
+      card.querySelector('.verdict').className='verdict ok';
+    });
+  });
+}
+
+function resetAll(){ location.reload(); }
+</script>
+</body>
+</html>
